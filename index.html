@@ -1,0 +1,236 @@
+<html lang="es" data-dark>
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Ejercicio 80</title>
+	<!-- Google Fonts - Montserrat -->
+	<link rel="preconnect" href="https://fonts.gstatic.com" />
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;700&display=swap" rel="stylesheet" />
+	<!-- Tasty CSS-animated hamburgers -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/hamburgers/1.1.3/hamburgers.css" rel="stylesheet" />
+	<!-- Prims.js -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/themes/prism-twilight.css" />
+	<script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/prism.min.js"></script>
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-numbers/prism-line-numbers.css">
+	<script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
+	
+	<script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+	<!-- Personalizado -->
+	<link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+	<header class="header-container">
+		<h1 class="header-container__title">Ejercicio del DOM</h1>
+	</header>
+	<aside class="menu-layer">
+		<ul class="links-container">
+			<li class="link-container">
+				<a href="#section-1" class="link-container__link">
+					<h2 class="link-container__text">Reloj y Alarma Sonora</h2>
+				</a>
+			</li>
+			<li class="link-container">
+				<a href="#section-2" class="link-container__link">
+					<h2 class="link-container__text">Eventos del Teclado</h2>
+				</a>
+			</li>
+			<li class="link-container">
+				<a href="#section-3" class="link-container__link">
+					<h2 class="link-container__text">Countdown</h2>
+				</a>
+			</li>
+			<li class="link-container">
+				<a href="#section-4" class="link-container__link">
+					<h2 class="link-container__text">Scroll Up</h2>
+				</a>
+			</li>
+			<li class="link-container">
+				<a href="#section-5" class="link-container__link">
+					<h2 class="link-container__text">Dark Mode</h2>
+				</a>
+			</li>
+			<li class="link-container">
+				<a href="#section-6" class="link-container__link">
+					<h2 class="link-container__text">Responsive con Javascript</h2>
+				</a>
+			</li>
+			<li class="link-container">
+				<a href="#section-7" class="link-container__link">
+					<h2 class="link-container__text">Responsive Tester</h2>
+				</a>
+			</li>
+			<li class="link-container">
+				<a href="#section-8" class="link-container__link">
+					<h2 class="link-container__text">Sección 8</h2>
+				</a>
+			</li>
+			<li class="link-container">
+				<a href="#section-9" class="link-container__link">
+					<h2 class="link-container__text">Sección 9</h2>
+				</a>
+			</li>
+			<li class="link-container">
+				<a href="#section-10" class="link-container__link">
+					<h2 class="link-container__text">Sección 10</h2>
+				</a>
+			</li>
+		</ul>
+	</aside>
+	<main class="main-container">
+		<article class="article-container">
+			<section id="section-1" class="section-1">
+				<h2 class="section-subtitle">Reloj Digital y Alarma Sonora</h2>
+				<div class="section-body">
+					<span class="section-body__clock"></span>
+					<audio src="car-alarm.mp3" class="section-body__alarm"></audio>
+					<div class="section-body__btns">
+						<button id="btn-clock-act" class="section-body__bnt" type="button">
+							Iniciar Reloj
+						</button>
+						<button id="btn-clock-dis" class="section-body__bnt" type="button">
+							Detener Reloj
+						</button>
+						<button id="btn-alarm-act" class="section-body__bnt" type="button">
+							Iniciar Alarma
+						</button>
+						<button id="btn-alarm-dis" class="section-body__bnt" type="button">
+							Detener Alarma
+						</button>
+					</div>
+				</div>
+			</section>
+			<section id="section-2" class="section-2">
+				<h2 class="section-subtitle">Eventos del Teclado</h2>
+				<div class="section-body">
+					<div class="block-container">
+						<span class="block-container__circle"></span>
+					</div>
+				</div>
+				<pre class="section-body__not-forget">
+					<code class="lang-js line-numbers">
+						// Recordar
+						even.key // Código tecla global.
+						even.keypre // Código tecla por teclado.
+						even.ctrlKey						
+						even.altKey
+					</code>
+				</pre>
+			</section>
+			<section id="section-3" class="section-3">
+				<h2 class="section-subtitle">Countdown</h2>
+				<div class="section-body">
+					<div class="countdown-container">
+						<span class="countdown"></span>
+					</div>
+				</div>
+				<pre class="section-body__not-forget">
+					<code class="lang-js line-numbers">
+						// Recordar
+						let convertionFactor = {
+							y: (1000 * 60 * 60 * 24 * 7 * 30 * 12),
+							m: (1000 * 60 * 60 * 24 * 7 * 30),
+							w: (1000 * 60 * 60 * 24 * 7),
+							d: (1000 * 60 * 60 * 24),
+							hh: (1000 * 60 * 60),
+							mm: (1000 * 60),
+							ss: (1000),
+						};
+						let obj = {};
+
+						obj.y = ms / convertionFactor.y;
+						obj.m = (ms % convertionFactor.y) / (convertionFactor.m);
+						obj.w = (ms % convertionFactor.m) / (convertionFactor.w);
+						obj.d = (ms % convertionFactor.w) / (convertionFactor.d);
+						obj.hh = (ms % convertionFactor.d) / (convertionFactor.hh);
+						obj.mm = (ms % convertionFactor.hh) / (convertionFactor.mm);
+						obj.ss = (ms % convertionFactor.mm) / (convertionFactor.ss);
+						
+					</code>
+				</pre>
+			</section>
+			<section id="section-4" class="section-4">
+				<h2 class="section-subtitle">Scroll Up</h2>
+				<div class="section-body">
+					<button class="circle-up circle-up--hidden" type="button"></button>
+				</div>
+				<pre class="section-body__not-forget">
+					<code class="lang-js line-numbers">
+						// Recordar
+						window.scrollTo({
+							behavior: 'smooth',
+							top: 0,
+							left: 0
+						});
+					</code>
+				</pre>
+			</section>
+			<section id="section-5" class="section-5">
+				<h2 class="section-subtitle">Dark Mode</h2>
+				<button class="dark-mode"></button>
+				<pre class="section-body__not-forget">
+					<code class="lang-js line-numbers">
+						// Recordar
+						const darkModeToggle = () => {
+							let $elementWithDataDark = d.querySelectorAll('[data-dark]');
+							$elementWithDataDark.forEach(elem => elem.classList.toggle('dark-mode--active'));
+							$darkMode.textContent === moon ? $darkMode.textContent = sun : $darkMode.textContent = moon;
+							localStorage.getItem('theme') === 'light' ? localStorage.setItem('theme', 'dark') : localStorage.setItem('theme', 'light');
+						};
+					</code>
+				</pre>
+				<pre class="section-body__not-forget">
+					<code class="lang-js line-numbers">
+						// Recordar
+						d.addEventListener('DOMContentLoaded', e => {
+							if(localStorage.getItem('theme') === null) localStorage.setItem('theme', 'light');
+							if(localStorage.getItem('theme') !== 'light') darkModeToggle();
+						});
+					</code>
+				</pre>
+			</section>
+			<section id="section-6" class="section-6">
+				<h2 class="section-subtitle">Responsive con Javascript</h2>
+				<div class="section-body">
+					<template id="element-to-load">
+						<div class="section-body__element-loaded"></div>
+					</template>
+				</div>
+			</section>
+			<section id="section-7" class="section-7">
+				<h2 class="section-subtitle">Responsive Tester</h2>
+				<div class="section-body">
+						<div class="tester-container">
+							<input type="url" class="tester-container__input" placeholder="Url">
+							<input type="number" class="tester-container__input" placeholder="Ancho">
+							<input type="number" class="tester-container__input" placeholder="Largo">
+							<button class="tester-container__button" type="button">Probar</button>
+							<button class="tester-container__button no-hover" type="button" disabled>Cerrar</button>
+						</div>
+				</div>
+			</section>
+			<section id="section-8" class="section-8">
+				<h2 class="section-subtitle">Sección 8</h2>
+			</section>
+			<section id="section-9" class="section-9">
+				<h2 class="section-subtitle">Sección 9</h2>
+			</section>
+			<section id="section-10" class="section-10">
+				<h2 class="section-subtitle">Sección 10</h2>
+			</section>
+		</article>
+		<button id="hamburger-button" class="hamburger hamburger--collapse" type="button">
+			<span class="hamburger-box">
+				<span class="hamburger-inner"></span>
+			</span>
+		</button>
+	</main>
+	<!-- Personalizado -->
+	<script src="script.js"></script>
+</body>
+
+</html>
