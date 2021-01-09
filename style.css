@@ -1,303 +1,490 @@
 *{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Montserrat', sans-serif;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Montserrat', sans-serif;
 }
 
 html{
-    scroll-behavior: smooth;
-    overflow-x: hidden;    
+	scroll-behavior: smooth;
+	overflow-x: hidden;    
 }
 
 .header-container{
-    position: sticky;
-    top: 0;
-    background-color: #FBD720;
-    width: 100vw;
-    z-index: 100;
+	position: sticky;
+	top: 0;
+	background-color: #FBD720;
+	width: 100vw;
+	z-index: 100;
 }
 
 .header-container__title{
-    text-align: center;
-    padding: 1rem 0;
-    color: #000;
+	text-align: center;
+	padding: 1rem 0;
+	color: #000;
 }
 
 .links-container{
-    display: flex;
-    height: 100vh;
-    flex-direction: column;
-    justify-content: space-evenly;
+	display: flex;
+	height: 100vh;
+	flex-direction: column;
+	justify-content: space-evenly;
 }
 
 .link-container{
-    font-family: 'Montserrat', sans-serif;
-    padding: 3rem 0;
+	font-family: 'Montserrat', sans-serif;
+	padding: 3rem 0;
 }
 
 .link-container:hover{
-    background: #FBD720;
-    color: #000;
+	background: #FBD720;
+	color: #000;
 }
 
 .link-container:hover .link-container__link{
-    color: #000;
+	color: #000;
 }
 
 .link-container__link{
-    text-decoration: none;
-    color: #FBD720;
+	text-decoration: none;
+	color: #FBD720;
 }
 
 .link-container__text{
-    text-align: center;
+	text-align: center;
 }
 
 .menu-layer{
-    position: fixed;
-    top: 0;
-    left: -2000px;
-    z-index: 200;
-    background-color: rgba(0, 0, 0, 0.95);
-    width: 100vw;
-    height: 100vh;    
+	position: fixed;
+	top: 0;
+	left: -2000px;
+	z-index: 200;
+	overflow-y: auto;  
+	background-color: rgba(0, 0, 0, 0.95);
+	width: 100vw;
+	height: 100vh;  
 }
 
 .main-container{
-    position: relative;
-    margin-top: 4rem;
+	position: relative;
+	margin-top: 4rem;
 }
 
 /*
 https://jahertor.com/2014/03/expresiones-regulares-en-selectores-css/ 
 Expresiones regulares en selectores CSS
-    p[id^="col"] { } // Lo que busco es una id que empieza por la cadena "col"
-    p[class$="col"] { } // Lo que busco es una clase que termina por la cadena "col"
-    p[title*="col"] { } // Encuentra la cadena "col" en un title de un párrafo, esté donde esté
+	p[id^="col"] { } // Lo que busco es una id que empieza por la cadena "col"
+	p[class$="col"] { } // Lo que busco es una clase que termina por la cadena "col"
+	p[title*="col"] { } // Encuentra la cadena "col" en un title de un párrafo, esté donde esté
 */
 
 section[class*="section-"]{
-    min-height: 95vh;
+	min-height: 95vh;
 }
 
 .section-subtitle{
-    text-align: center;
-    padding: 1rem 0;
+	text-align: center;
+	padding: 1rem 0;
 }
 
 .section-body__not-forget{
-    max-width: 80vw;
-    margin: 2rem auto !important;
+	max-width: 80vw;
+	margin: 2rem auto !important;
 }
 
 #hamburger-button{
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    background-color: #FBD720;
-    width: 6rem;
-    height: 6rem;
-    margin: 2.5rem;
-    padding: 1.5rem;
-    border-radius: 100%;
-    outline: none;
-    z-index: 300;
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	background-color: #FBD720;
+	width: 6rem;
+	height: 6rem;
+	margin: 2.5rem;
+	padding: 1.5rem;
+	border-radius: 100%;
+	outline: none;
+	z-index: 300;
 }
 
 @keyframes swipe-lr{
-    from{left: -2000px;}
-    to{left: 0;}
+	from{left: -2000px;}
+	to{left: 0;}
 }
 
 /* Reloj Digital */
 .section-body{
-    display: flex;
-    flex-direction: column;
-    max-width: 1200px;
-    margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	max-width: 1200px;
+	margin: 0 auto;
 }
 
 .section-body__clock{
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1.5rem;
-    margin: 1rem auto;
+	font-family: 'Montserrat', sans-serif;
+	font-size: 1.5rem;
+	margin: 1rem auto;
 }
 
 .section-body__btns{
-    display: flex;
-    justify-content: center;
+	display: flex;
+	justify-content: center;
 }
 
 /* Eventos del Teclado */
 .block-container{
-    position: relative;
-    background-color: #222222;
-    overflow: hidden;
-    height: 50vh;
+	position: relative;
+	background-color: #222222;
+	overflow: hidden;
+	height: 50vh;
 }
 
 .block-container__circle{
-    position: absolute;
-    background-color: #FBD720;
-    border-radius: 100%;
-    width: 100px;
-    height: 100px;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    margin: auto;
+	position: absolute;
+	background-color: #FBD720;
+	border-radius: 100%;
+	width: 100px;
+	height: 100px;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	margin: auto;
 }
 
 /* CountDown */
 .countdown-container{
-    margin: auto;
+	margin: auto;
 }
 
 .countdown{
-    font-size: 1.5rem;
+	font-size: 1.5rem;
 }
 
 /* Scroll Up */
 .circle-up{
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    border: none;
-    border-radius: 100%;
-    background-color: #FBD720;
-    width: 100px;
-    height: 100px;
-    margin: 2.5rem 10rem;
-    z-index: 300;
-    cursor: pointer;
-    transition: opacity .3s, visibility .3s linear;
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	border: none;
+	border-radius: 100%;
+	background-color: #FBD720;
+	width: 100px;
+	height: 100px;
+	margin: 2.5rem 10rem;
+	z-index: 300;
+	cursor: pointer;
+	transition: opacity .3s, visibility .3s linear;
 }
 
 .circle-up::before{
-    content: url('down-arrow.svg');
-    display: inline-block;
-    height: 50px;
-    width: 50px;
-    transform: rotate(180deg);
+	content: url('down-arrow.svg');
+	display: inline-block;
+	height: 50px;
+	width: 50px;
+	transform: rotate(180deg);
 }
 
 .circle-up:focus-visible{
-    outline: none;
+	outline: none;
 }
 
 .circle-up:hover{
-    opacity: 0.7;
+	opacity: 0.7;
 }
 
 .circle-up--hidden{
-    visibility: hidden;
-    opacity: 0;
+	visibility: hidden;
+	opacity: 0;
 }
 
 /* Dark Mode */
 .dark-mode{
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    border: none;
-    border-radius: 100%;
-    background-color: #FBD720;
-    width: 100px;
-    height: 100px;
-    margin: 2.5rem;
-    z-index: 300;
-    cursor: pointer;
-    transition: opacity .3s, visibility .3s, background-color .3s linear;
-    font-size: 50px;
-    text-shadow: 0 0 10px #000;
-    font-weight: bold;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	border: none;
+	border-radius: 100%;
+	background-color: #FBD720;
+	width: 100px;
+	height: 100px;
+	margin: 2.5rem;
+	z-index: 300;
+	cursor: pointer;
+	transition: opacity .3s, visibility .3s, background-color .3s linear;
+	font-size: 50px;
+	text-shadow: 0 0 10px #000;
+	font-weight: bold;
 }
 
 .dark-mode:hover{
-    background-color: #222222;
+	background-color: #222222;
 }
 
 .dark-mode--active{
-    background-color: #222222;
-    color: #FBD720;
+	background-color: #222222;
+	color: #FBD720;
 }
 
 /* Responsive with javascript */
 .section-body__mobile-element{
-    text-align: center;
-    font-size: 1.5rem;
-    text-decoration: none;
-    color: #000;
-    margin-bottom: 1rem;
+	text-align: center;
+	font-size: 1.5rem;
+	text-decoration: none;
+	color: #000;
+	margin-bottom: 1rem;
 }
 
 .section-body__desktop-element{
-    height: 400px;
-    width: 650px;
-    margin: 0 auto 1rem auto;
-    border: 2px solid #222;
+	height: 400px;
+	width: 650px;
+	margin: 0 auto 1rem auto;
+	border: 2px solid #222;
 }
 
 /* Responsive Tester */
 .tester-container{
-    display: flex;
-    flex-wrap: wrap;
-    margin: auto;
-    width: 200px;
+	display: flex;
+	flex-wrap: wrap;
+	margin: auto;
+	width: 200px;
 }
 
 .tester-container__input{
-    border: 1px solid #222;
-    border-radius: 10px;
-    padding: .6rem .4rem;
-    margin-bottom: .5rem;
+	border: 1px solid #222;
+	border-radius: 10px;
+	padding: .6rem .4rem;
+	margin-bottom: .5rem;
 }
 
 .tester-container__input:focus-visible{
-    outline: none;
-    border: 2px solid #FBD720;
+	outline: none;
+	border: 2px solid #FBD720;
 }
 
 .tester-container__input::-webkit-outer-spin-button,
 .tester-container__input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+-webkit-appearance: none;
+margin: 0;
 }
 
 /* Firefox */
 .tester-container__input[type=number] {
-  -moz-appearance: textfield;
+-moz-appearance: textfield;
 }
 
 .tester-container__input:valid,.tester-container__input:invalid{
-    border: 1px solid #222;
+	border: 1px solid #222;
 }
 
 .tester-container__button{
-    background: #FFF;
-    font-size: 1rem;
-    font-weight: bold;
-    border: 1px solid #222;
-    width: 96px;
-    padding: .6rem 0;
-    transition: background-color .2s linear;
+	background: #FFF;
+	font-size: 1rem;
+	font-weight: bold;
+	border: 1px solid #222;
+	width: 96px;
+	padding: .6rem 0;
+	transition: background-color .2s linear;
 }
 
 .tester-container__button:first-of-type{
-    margin-right: 4px;
+	margin-right: 4px;
 }
 
 .tester-container__button:last-of-type{
-    margin-left: 4px;
+	margin-left: 4px;
 }
 
 .tester-container__button:hover{
-    background-color: #222222;
-    color: #FBD720;
+	background-color: #222222;
+	color: #FBD720;
 }
 
 .no-hover{
-    pointer-events: none;
+	pointer-events: none;
+}
+
+/* Navegator */
+.section-body__definition{
+	text-align: center;
+	margin-bottom: 1rem;
+}
+
+.section-body__word{
+	text-transform: capitalize;
+	font-weight: 600;
+	font-style: normal;
+}
+
+/* Deteccion Internet */
+.network-message{
+	position: fixed;
+	top: 0;
+	z-index: 200;
+	transform: translateY(-100%);
+	transition-property: transform, background-color;
+	transition-duration: .5s;
+	transition-timing-function: linear;
+	width: 100vw;
+	padding: 1rem 0;
+
+	text-align: center;
+	color: #FFF;
+	font-weight: bolder;
+	font-size: 2rem;
+}
+
+.network-container__message--online{
+	background-color: #32d632;
+	transform: translateY(0);
+}
+
+.network-container__message--online::after{
+	content: 'Conexión Establecida';
+}
+
+.network-container__message--offline{
+	background-color: #d63232;
+	transform: translateY(0);
+}
+
+.network-container__message--offline::after{
+	content: 'Conexión Perdida';
+}
+
+/* Detección Web Cam */
+.webcamera-container{
+	border: 2px dashed #222;
+	height: 70vh;
+	width: 80vw;
+	margin: 0 8rem;
+}
+
+/* Geolocalización */
+.section-body__ubication{
+	text-align: center;
+	margin-bottom: 1rem;
+}
+
+#latitude,#longitude,#exactly-mts{
+	font-weight: bold;
+	font-style: normal;
+}
+
+.section-body__link-maps{
+	color: #000;
+	text-align: center;
+}
+
+/* Search filter */
+.section-body__search{
+	margin: 0 auto;
+	width: 50vw;
+	margin-bottom: 1rem;
+}
+
+.section-body__grid-card{
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	row-gap: 2rem;
+}
+
+.img-container{
+	position: relative;
+	border-radius: 10px;
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	overflow: hidden;
+	transition: opacity .5s ease;
+	width: 350px;
+	height: 250px;
+}
+
+.img-container--nne{
+	display: none;
+}
+
+.img-container--opacity{
+	opacity: 0;
+	order: 10;
+	position: absolute;
+}
+
+.img-container__description{
+	position: absolute;
+	bottom: 0;
+	background-color: #222;
+	color: #FBD720;
+	font-size: 1rem;
+	padding: 1rem 0;
+	width: 100%;
+}
+
+/* Digital raffle */
+.section-body__data-raffle{
+	font-size: 1rem;
+	text-transform: capitalize;
+	margin-bottom: 1rem;
+}
+
+.section-body__select-winner{
+	background-color: #FFF;
+	border: 1px solid;
+	font-weight: bold;
+	padding: .5rem 0;
+	width: 200px;
+	margin: 0 auto;
+}
+
+/* Slider Resposive */
+.slider-container{
+	display: flex;
+	position: relative;
+	overflow: hidden;
+	width: 720px;
+	height: auto;
+	margin: 0 auto;
+}
+
+.slider-element{
+	position: relative;
+	transition: transform .2s linear;
+}
+
+.slider-element__image{
+	
+}
+
+.slider-element__detail{
+	position: absolute;
+	bottom: 5px;
+	font-size: 1rem;
+	color: #FFF;
+	text-align: justify;
+
+	background-color: #22222280;
+	padding: 1rem;
+}
+
+.slider-containet__arrow{
+	position: absolute;
+	top: 40%;
+	
+	font-size: 5rem;
+	font-weight: bold;
+	color: #FFF3;
+
+	transition: color .2s linear;
+	cursor: pointer;
+}
+.slider-containet__arrow[role=left]{
+	left: 1rem;
+}
+
+.slider-containet__arrow[role=right]{
+	right: 1rem;
+}
+
+.slider-containet__arrow:hover{
+	color: #FFF;
 }

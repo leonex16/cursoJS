@@ -16,9 +16,7 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-numbers/prism-line-numbers.css">
 	<script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
 
-	<script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
-	
-	<script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>	
 	<!-- Personalizado -->
 	<link rel="stylesheet" href="style.css" />
 </head>
@@ -66,17 +64,47 @@
 			</li>
 			<li class="link-container">
 				<a href="#section-8" class="link-container__link">
-					<h2 class="link-container__text">Sección 8</h2>
+					<h2 class="link-container__text">Navegator</h2>
 				</a>
 			</li>
 			<li class="link-container">
 				<a href="#section-9" class="link-container__link">
-					<h2 class="link-container__text">Sección 9</h2>
+					<h2 class="link-container__text">Detección Internet</h2>
 				</a>
 			</li>
 			<li class="link-container">
 				<a href="#section-10" class="link-container__link">
-					<h2 class="link-container__text">Sección 10</h2>
+					<h2 class="link-container__text">Detección Cámara</h2>
+				</a>
+			</li>
+			<li class="link-container">
+				<a href="#section-11" class="link-container__link">
+					<h2 class="link-container__text">Geolocalización</h2>
+				</a>
+			</li>
+			<li class="link-container">
+				<a href="#section-12" class="link-container__link">
+					<h2 class="link-container__text">Filtro de Búsqueda</h2>
+				</a>
+			</li>
+			<li class="link-container">
+				<a href="#section-13" class="link-container__link">
+					<h2 class="link-container__text">Sorteo Digital</h2>
+				</a>
+			</li>
+			<li class="link-container">
+				<a href="#section-14" class="link-container__link">
+					<h2 class="link-container__text">Slider Resposive</h2>
+				</a>
+			</li>
+			<li class="link-container">
+				<a href="#section-15" class="link-container__link">
+					<h2 class="link-container__text">Sección 15</h2>
+				</a>
+			</li>
+			<li class="link-container">
+				<a href="#section-16" class="link-container__link">
+					<h2 class="link-container__text">Sección 16</h2>
 				</a>
 			</li>
 		</ul>
@@ -141,7 +169,6 @@
 							ss: (1000),
 						};
 						let obj = {};
-
 						obj.y = ms / convertionFactor.y;
 						obj.m = (ms % convertionFactor.y) / (convertionFactor.m);
 						obj.w = (ms % convertionFactor.m) / (convertionFactor.w);
@@ -197,8 +224,33 @@
 				<h2 class="section-subtitle">Responsive con Javascript</h2>
 				<div class="section-body">
 					<template id="element-to-load">
-						<div class="section-body__element-loaded"></div>
+						<div class="section-body_element-loaded"></div>
 					</template>
+					<pre class="section-body__not-forget">
+						<code class="lang-js line-numbers">
+							// Recordar
+							const $template = d.querySelector('#element-to-load');
+							const $parentElement = $template.parentElement;
+							const $fragment = d.createDocumentFragment();
+							const breakpoint = window.matchMedia('(min-width: 768px)');
+							const elementToLoad = [
+								// 'https://www.youtube.com/embed/6IwUl-4pAzc',
+								// 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3323.256167273655!2d-70.70786538425537!3d-33.59865728073181!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9662d94f6eef1f51%3A0x48e82f1d2eb65ea9!2sDuoc!5e0!3m2!1ses-419!2scl!4v1609816528155!5m2!1ses-419!2scl'
+							];
+							let counter = 0;
+						
+							elementToLoad.forEach(link => {
+								if (breakpoint.matches) {
+									$fragment.appendChild(desktopDisplay(link))
+								} else {
+									counter++;
+									$fragment.appendChild(mobileDisplay(counter, link));
+								};
+							});
+						
+							$parentElement.appendChild($fragment)
+						</code>
+					</pre>
 				</div>
 			</section>
 			<section id="section-7" class="section-7">
@@ -212,15 +264,229 @@
 							<button class="tester-container__button no-hover" type="button" disabled>Cerrar</button>
 						</div>
 				</div>
+				<pre class="section-body__not-forget">
+					<code class="lang-js line-numbers">
+						// Recordar
+						const openWindow = (tryBtn, closeBtn, link, w, h) => {
+							let windowConf = `menubar=no,navegationtoolbar=no,bookmarktoolbar=no,width=${w},height=${h},statusbar=no,centerscreen=yes`;
+							closeBtn.disabled = false;
+							closeBtn.classList.remove('no-hover');
+							tryBtn.disabled = true;
+							tryBtn.classList.add('no-hover');
+							return window.open(link, 'Window name', windowConf);
+						};
+					</code>
+				</pre>
 			</section>
 			<section id="section-8" class="section-8">
-				<h2 class="section-subtitle">Sección 8</h2>
+				<h2 class="section-subtitle">Navegator</h2>
+				<div id="user-information" class="section-body"></div>
+				<pre class="section-body__not-forget">
+					<code class="lang-js line-numbers">
+						// Recordar
+						const n = window.navigator;
+						const $userInformation = d.querySelector('#user-information');
+						const isMobile = {
+							'android' : () => n.userAgent.match(/android/i),
+							'ios' : () => n.userAgent.match(/iphone|ipad|ipod/i),
+							'any' : function(){
+								return this.android() || this.ios();
+							}
+						};
+					</code>
+				</pre>
 			</section>
 			<section id="section-9" class="section-9">
-				<h2 class="section-subtitle">Sección 9</h2>
+				<h2 class="section-subtitle">Detección Internet</h2>
+				<div class="network-message"></div>
+				<pre class="section-body__not-forget">
+					<code class="lang-js line-numbers">
+						// Recordar
+						const showNetworkMessage = classAdd => {
+							const $networkMsg = d.querySelector('.network-message');
+							$networkMsg.className = 'network-message';
+							$networkMsg.classList.add(classAdd);
+							setTimeout(() => $networkMsg.classList.remove(classAdd), 3000);
+						};
+						const detectConnection = () => {
+							const classAdd = window.navigator.onLine ? 'network-container__message--online' : 'network-container__message--offline';	
+							showNetworkMessage(classAdd);
+						};
+					</code>
+				</pre>
 			</section>
 			<section id="section-10" class="section-10">
-				<h2 class="section-subtitle">Sección 10</h2>
+				<h2 class="section-subtitle">Detección Cámara</h2>
+				<video src="" class="webcamera-container"></video>
+				<pre class="section-body__not-forget">
+					<code class="lang-js line-numbers">
+						// Recordar
+						const detectWebCam = () => {
+							const $webCamContainer = d.querySelector('.webcamera-container');
+							if (window.navigator.mediaDevices.getUserMedia) {
+								window.navigator.mediaDevices.getUserMedia({
+									audio: false,
+									video: true,
+								})
+									.then(data => {
+										console.log(data);
+										$webCamContainer.srcObject = data;
+										$webCamContainer.play();
+									})
+									.catch(err => console.warn(`ERROR en detectWebCam: ${err}`));
+							};
+						};
+					</code>
+				</pre>
+			</section>
+			<section class="section-11" id="section-11">
+				<h2 class="section-subtitle">Geolocalización</h2>
+				<div class="section-body">
+					<p class="section-body__ubication"><dfn id="latitude">Latitud: </dfn></p>
+					<p class="section-body__ubication"><dfn id="longitude">Longitud: </dfn></p>
+					<p class="section-body__ubication"><dfn id="exactly-mts">Exactitud a: </dfn></p>
+					<a class="section-body__link-maps" target="_blank" rel="noopener">Ver un Google Maps</a>
+				</div>
+				<pre class="section-body__not-forget">
+					<code class="lang-js line-numbers">
+						// Recordar
+						const getUbication = () => {
+							const $elementUbicationArr = d.querySelectorAll('.section-body__ubication');
+							const positionOptions = {
+								enableHighAccuracy : true,
+								timeout: Infinity, // ms | Infinity
+								maximumAge: Infinity // 0 | Infinity
+							};
+							window.navigator.geolocation.getCurrentPosition(
+								success => {
+									let link = `https://www.google.cl/maps/@${success.coords.latitude},${success.coords.longitude}20z`;
+									$elementUbicationArr[0].insertAdjacentText('beforeend', success.coords.latitude);
+									$elementUbicationArr[1].insertAdjacentText('beforeend', success.coords.longitude); 
+									$elementUbicationArr[2].insertAdjacentText('beforeend', success.coords.accuracy + ' mts');
+									$elementUbicationArr[2].nextElementSibling.setAttribute('href', link);
+								},
+								error => {
+									console.warn(`ERROR en getUbication: ${error}`)
+								},
+								positionOptions
+							);
+						};
+					</code>
+				</pre>
+			</section>
+			<section class="section-subtitle" id="section-12">
+				<h2 class="section-subtitle">Filtro de Búsqueda</h2>
+				<div class="section-body">
+					<input type="text" class="section-body__search" placeholder="Texto a Buscar">
+					<div class="section-body__grid-card"></div>
+					<template id="template-card">
+						<figure class="img-container">
+							<figcaption class="img-container__description"></figcaption>
+						</figure>
+					</template>
+				</div>
+				<pre class="section-body__not-forget">
+					<code class="lang-js line-numbers">
+						// Recordar
+						const filterSearch = e => {
+							if(e.target.matches('.section-body__search')){
+								const $descriptionImg = d.querySelectorAll('.img-container__description');
+								let str = d.querySelector('.section-body__search').value;
+								let regex = new RegExp(str, 'i')
+								for (const elemDescription of $descriptionImg) {
+									if(!regex.test(elemDescription.textContent)){
+										elemDescription.parentElement.classList.add('img-container--none');
+										elemDescription.parentElement.classList.add('img-container--opacity');
+									}else{
+										elemDescription.parentElement.classList.remove('img-container--none');
+										elemDescription.parentElement.classList.remove('img-container--opacity');
+									};
+								}
+							}
+						};
+					</code>
+				</pre>
+			</section>
+			<section class="section-subtitle" id="section-13">
+				<h2 class="section-subtitle">Sorteo Digital</h2>
+				<div class="section-body">
+					<button class="section-body__select-winner" type="button">Haz Clic Para Sortear</button>
+				</div>
+				<pre class="section-body__not-forget">
+					<code class="lang-js line-numbers">
+						// Recordar
+						const createRaffleDOM = (dataArr) => {
+							const $raffleContainer = d.querySelector('.section-body__select-winner');
+							
+							dataArr.forEach(elem => {
+								const p = d.createElement('p');
+								p.classList.add('section-body__data-raffle');
+								p.textContent = elem;
+								$raffleContainer.insertAdjacentElement('beforebegin', p);
+							});
+						};
+						const digitalRaffle = (e, dataArr) => {
+							if(e.target.matches('.section-body__select-winner')){
+								let numberWinner = Math.round(Math.random()*(dataArr.length -1));
+								let winnerFormated = dataArr[numberWinner].charAt(0).toUpperCase() + dataArr[numberWinner].substring(1);
+								window.alert(`El ganador es ${winnerFormated}`);
+							};
+						};
+					</code>
+				</pre>
+			</section>
+			<section class="section-subtitle" id="section-14">
+				<h2 class="section-subtitle">Slider Resposive</h2>
+				<div class="section-body">
+					<article class="slider-container">
+						<figure class="slider-element">
+							<img src="https://loremflickr.com/720/420" alt="Any" class="slider-element__image">
+							<figcaption class="slider-element__detail">
+								Lorem, ipsum dolor sit amet consectetur adipisicing elit. Modi, aperiam eaque tenetur earum alias eveniet quidem ipsum inventore iste delectus facilis nulla numquam placeat doloribus eos unde debitis, amet dignissimos?
+							</figcaption>
+						</figure>
+						<figure class="slider-element">
+							<img src="https://loremflickr.com/720/421" alt="Any" class="slider-element__image">
+							<figcaption class="slider-element__detail">
+								Lorem, ipsum dolor sit amet consectetur adipisicing elit. Modi, aperiam eaque tenetur earum alias eveniet quidem ipsum inventore iste delectus facilis nulla numquam placeat doloribus eos unde debitis, amet dignissimos?
+							</figcaption>
+						</figure>
+						<figure class="slider-element">
+							<img src="https://loremflickr.com/720/422" alt="Any" class="slider-element__image">
+							<figcaption class="slider-element__detail">
+								Lorem, ipsum dolor sit amet consectetur adipisicing elit. Modi, aperiam eaque tenetur earum alias eveniet quidem ipsum inventore iste delectus facilis nulla numquam placeat doloribus eos unde debitis, amet dignissimos?
+							</figcaption>
+						</figure>
+						<figure class="slider-element">
+							<img src="https://loremflickr.com/720/423" alt="Any" class="slider-element__image">
+							<figcaption class="slider-element__detail">
+								Lorem, ipsum dolor sit amet consectetur adipisicing elit. Modi, aperiam eaque tenetur earum alias eveniet quidem ipsum inventore iste delectus facilis nulla numquam placeat doloribus eos unde debitis, amet dignissimos?
+							</figcaption>
+						</figure>
+						<figure class="slider-element">
+							<img src="https://loremflickr.com/720/424" alt="Any" class="slider-element__image">
+							<figcaption class="slider-element__detail">
+								Lorem, ipsum dolor sit amet consectetur adipisicing elit. Modi, aperiam eaque tenetur earum alias eveniet quidem ipsum inventore iste delectus facilis nulla numquam placeat doloribus eos unde debitis, amet dignissimos?
+							</figcaption>
+						</figure>
+						<figure class="slider-element">
+							<img src="https://loremflickr.com/720/425" alt="Any" class="slider-element__image">
+							<figcaption class="slider-element__detail">
+								Lorem, ipsum dolor sit amet consectetur adipisicing elit. Modi, aperiam eaque tenetur earum alias eveniet quidem ipsum inventore iste delectus facilis nulla numquam placeat doloribus eos unde debitis, amet dignissimos?
+							</figcaption>
+						</figure>
+						<span class="slider-containet__arrow" role="right">></span>
+						<span class="slider-containet__arrow" role="left"><</span>
+					</article>
+				</div>
+			</section>
+			<section class="section-subtitle" id="section-15">
+				<h2 class="section-subtitle">Sección 15</h2>
+				<div class="section-body"></div>
+			</section>
+			<section class="section-subtitle" id="section-16">
+				<h2 class="section-subtitle">Sección 16</h2>
+				<div class="section-body"></div>
 			</section>
 		</article>
 		<button id="hamburger-button" class="hamburger hamburger--collapse" type="button">
