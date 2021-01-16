@@ -18,7 +18,7 @@
 
 	<script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>	
 	<!-- Personalizado -->
-	<link rel="stylesheet" href="style.css" />
+	<link rel="stylesheet" href="css/style.css" />
 </head>
 
 <body>
@@ -29,93 +29,103 @@
 		<ul class="links-container">
 			<li class="link-container">
 				<a href="#section-1" class="link-container__link">
-					<h2 class="link-container__text">Reloj y Alarma Sonora</h2>
+					<h2 class="link-container__text" data-dark>Reloj y Alarma Sonora</h2>
 				</a>
 			</li>
 			<li class="link-container">
 				<a href="#section-2" class="link-container__link">
-					<h2 class="link-container__text">Eventos del Teclado</h2>
+					<h2 class="link-container__text" data-dark>Eventos del Teclado</h2>
 				</a>
 			</li>
 			<li class="link-container">
 				<a href="#section-3" class="link-container__link">
-					<h2 class="link-container__text">Countdown</h2>
+					<h2 class="link-container__text" data-dark>Countdown</h2>
 				</a>
 			</li>
 			<li class="link-container">
 				<a href="#section-4" class="link-container__link">
-					<h2 class="link-container__text">Scroll Up</h2>
+					<h2 class="link-container__text" data-dark>Scroll Up</h2>
 				</a>
 			</li>
 			<li class="link-container">
 				<a href="#section-5" class="link-container__link">
-					<h2 class="link-container__text">Dark Mode</h2>
+					<h2 class="link-container__text" data-dark>Dark Mode</h2>
 				</a>
 			</li>
 			<li class="link-container">
 				<a href="#section-6" class="link-container__link">
-					<h2 class="link-container__text">Responsive con Javascript</h2>
+					<h2 class="link-container__text" data-dark>Responsive con Javascript</h2>
 				</a>
 			</li>
 			<li class="link-container">
 				<a href="#section-7" class="link-container__link">
-					<h2 class="link-container__text">Responsive Tester</h2>
+					<h2 class="link-container__text" data-dark>Responsive Tester</h2>
 				</a>
 			</li>
 			<li class="link-container">
 				<a href="#section-8" class="link-container__link">
-					<h2 class="link-container__text">Navegator</h2>
+					<h2 class="link-container__text" data-dark>Navegator</h2>
 				</a>
 			</li>
 			<li class="link-container">
 				<a href="#section-9" class="link-container__link">
-					<h2 class="link-container__text">Detección Internet</h2>
+					<h2 class="link-container__text" data-dark>Detección Internet</h2>
 				</a>
 			</li>
 			<li class="link-container">
 				<a href="#section-10" class="link-container__link">
-					<h2 class="link-container__text">Detección Cámara</h2>
+					<h2 class="link-container__text" data-dark>Detección Cámara</h2>
 				</a>
 			</li>
 			<li class="link-container">
 				<a href="#section-11" class="link-container__link">
-					<h2 class="link-container__text">Geolocalización</h2>
+					<h2 class="link-container__text" data-dark>Geolocalización</h2>
 				</a>
 			</li>
 			<li class="link-container">
 				<a href="#section-12" class="link-container__link">
-					<h2 class="link-container__text">Filtro de Búsqueda</h2>
+					<h2 class="link-container__text" data-dark>Filtro de Búsqueda</h2>
 				</a>
 			</li>
 			<li class="link-container">
 				<a href="#section-13" class="link-container__link">
-					<h2 class="link-container__text">Sorteo Digital</h2>
+					<h2 class="link-container__text" data-dark>Sorteo Digital</h2>
 				</a>
 			</li>
 			<li class="link-container">
 				<a href="#section-14" class="link-container__link">
-					<h2 class="link-container__text">Slider Resposive</h2>
+					<h2 class="link-container__text" data-dark>Slider Resposive</h2>
 				</a>
 			</li>
 			<li class="link-container">
 				<a href="#section-15" class="link-container__link">
-					<h2 class="link-container__text">Sección 15</h2>
+					<h2 class="link-container__text" data-dark>Scroll Spy</h2>
 				</a>
 			</li>
 			<li class="link-container">
 				<a href="#section-16" class="link-container__link">
-					<h2 class="link-container__text">Sección 16</h2>
+					<h2 class="link-container__text" data-dark>Video Inteligente</h2>
+				</a>
+			</li>
+			<li class="link-container">
+				<a href="#section-17" class="link-container__link">
+					<h2 class="link-container__text" data-dark>Validacíon Formulario</h2>
+				</a>
+			</li>
+			<li class="link-container">
+				<a href="#section-18" class="link-container__link">
+					<h2 class="link-container__text" data-dark>Narrador</h2>
 				</a>
 			</li>
 		</ul>
 	</aside>
 	<main class="main-container">
 		<article class="article-container">
-			<section id="section-1" class="section-1">
+			<section id="section-1" class="section-1" data-scroll-spy>
 				<h2 class="section-subtitle">Reloj Digital y Alarma Sonora</h2>
 				<div class="section-body">
 					<span class="section-body__clock"></span>
-					<audio src="car-alarm.mp3" class="section-body__alarm"></audio>
+					<audio src="/asset/car-alarm.mp3" class="section-body__alarm"></audio>
 					<div class="section-body__btns">
 						<button id="btn-clock-act" class="section-body__bnt" type="button">
 							Iniciar Reloj
@@ -131,8 +141,50 @@
 						</button>
 					</div>
 				</div>
+				<pre class="section-body__not-forget">
+					<code class="lang-js line-numbers">
+						// Recordar
+						let $digitalClock = d.querySelector('.section-body__clock');
+						let $alarm = d.querySelector('.section-body__alarm');
+						
+						const clockAct = (digitalClock, elem) => {
+							let clock = new Date().toTimeString().split(' ')[0];
+							digitalClock.textContent = clock;
+							elem.target.disabled = true;
+						};
+						
+						const clockDis = (digitalClock, elem) => {
+							digitalClock.textContent = '';
+							elem.target.previousElementSibling.disabled = false;
+						};
+						
+						const alarmAct = alarm => alarm.play();
+						
+						const alarmDis = alarm => alarm.pause();
+						
+						const sectionOne = (even) => {
+							switch (even.target.id) {
+								case 'btn-clock-act':
+									setInterval(() => clockAct($digitalClock, even), 1000);
+									break;
+								case 'btn-clock-dis':
+									clockDis($digitalClock, even);
+									break;
+								case 'btn-alarm-act':
+									alarmAct($alarm);
+									break;
+								case 'btn-alarm-dis':
+									alarmDis($alarm);
+									break;
+						
+								default:
+									break;
+							}
+						};
+					</code>
+				</pre>
 			</section>
-			<section id="section-2" class="section-2">
+			<section id="section-2" class="section-2" data-scroll-spy>
 				<h2 class="section-subtitle">Eventos del Teclado</h2>
 				<div class="section-body">
 					<div class="block-container">
@@ -149,7 +201,7 @@
 					</code>
 				</pre>
 			</section>
-			<section id="section-3" class="section-3">
+			<section id="section-3" class="section-3" data-scroll-spy>
 				<h2 class="section-subtitle">Countdown</h2>
 				<div class="section-body">
 					<div class="countdown-container">
@@ -180,7 +232,7 @@
 					</code>
 				</pre>
 			</section>
-			<section id="section-4" class="section-4">
+			<section id="section-4" class="section-4" data-scroll-spy>
 				<h2 class="section-subtitle">Scroll Up</h2>
 				<div class="section-body">
 					<button class="circle-up circle-up--hidden" type="button"></button>
@@ -196,7 +248,7 @@
 					</code>
 				</pre>
 			</section>
-			<section id="section-5" class="section-5">
+			<section id="section-5" class="section-5" data-scroll-spy>
 				<h2 class="section-subtitle">Dark Mode</h2>
 				<button class="dark-mode"></button>
 				<pre class="section-body__not-forget">
@@ -220,40 +272,40 @@
 					</code>
 				</pre>
 			</section>
-			<section id="section-6" class="section-6">
+			<section id="section-6" class="section-6" data-scroll-spy>
 				<h2 class="section-subtitle">Responsive con Javascript</h2>
 				<div class="section-body">
 					<template id="element-to-load">
 						<div class="section-body_element-loaded"></div>
 					</template>
-					<pre class="section-body__not-forget">
-						<code class="lang-js line-numbers">
-							// Recordar
-							const $template = d.querySelector('#element-to-load');
-							const $parentElement = $template.parentElement;
-							const $fragment = d.createDocumentFragment();
-							const breakpoint = window.matchMedia('(min-width: 768px)');
-							const elementToLoad = [
-								// 'https://www.youtube.com/embed/6IwUl-4pAzc',
-								// 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3323.256167273655!2d-70.70786538425537!3d-33.59865728073181!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9662d94f6eef1f51%3A0x48e82f1d2eb65ea9!2sDuoc!5e0!3m2!1ses-419!2scl!4v1609816528155!5m2!1ses-419!2scl'
-							];
-							let counter = 0;
-						
-							elementToLoad.forEach(link => {
-								if (breakpoint.matches) {
-									$fragment.appendChild(desktopDisplay(link))
-								} else {
-									counter++;
-									$fragment.appendChild(mobileDisplay(counter, link));
-								};
-							});
-						
-							$parentElement.appendChild($fragment)
-						</code>
-					</pre>
 				</div>
+				<pre class="section-body__not-forget">
+					<code class="lang-js line-numbers">
+						// Recordar
+						const $template = d.querySelector('#element-to-load');
+						const $parentElement = $template.parentElement;
+						const $fragment = d.createDocumentFragment();
+						const breakpoint = window.matchMedia('(min-width: 768px)');
+						const elementToLoad = [
+							// 'https://www.youtube.com/embed/6IwUl-4pAzc',
+							// 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3323.256167273655!2d-70.70786538425537!3d-33.59865728073181!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9662d94f6eef1f51%3A0x48e82f1d2eb65ea9!2sDuoc!5e0!3m2!1ses-419!2scl!4v1609816528155!5m2!1ses-419!2scl'
+						];
+						let counter = 0;
+					
+						elementToLoad.forEach(link => {
+							if (breakpoint.matches) {
+								$fragment.appendChild(desktopDisplay(link))
+							} else {
+								counter++;
+								$fragment.appendChild(mobileDisplay(counter, link));
+							};
+						});
+					
+						$parentElement.appendChild($fragment)
+					</code>
+				</pre>
 			</section>
-			<section id="section-7" class="section-7">
+			<section id="section-7" class="section-7" data-scroll-spy>
 				<h2 class="section-subtitle">Responsive Tester</h2>
 				<div class="section-body">
 						<div class="tester-container">
@@ -278,7 +330,7 @@
 					</code>
 				</pre>
 			</section>
-			<section id="section-8" class="section-8">
+			<section id="section-8" class="section-8" data-scroll-spy>
 				<h2 class="section-subtitle">Navegator</h2>
 				<div id="user-information" class="section-body"></div>
 				<pre class="section-body__not-forget">
@@ -296,7 +348,7 @@
 					</code>
 				</pre>
 			</section>
-			<section id="section-9" class="section-9">
+			<section id="section-9" class="section-9" data-scroll-spy>
 				<h2 class="section-subtitle">Detección Internet</h2>
 				<div class="network-message"></div>
 				<pre class="section-body__not-forget">
@@ -315,7 +367,7 @@
 					</code>
 				</pre>
 			</section>
-			<section id="section-10" class="section-10">
+			<section id="section-10" class="section-10" data-scroll-spy>
 				<h2 class="section-subtitle">Detección Cámara</h2>
 				<video src="" class="webcamera-container"></video>
 				<pre class="section-body__not-forget">
@@ -339,7 +391,7 @@
 					</code>
 				</pre>
 			</section>
-			<section class="section-11" id="section-11">
+			<section class="section-11" id="section-11" data-scroll-spy>
 				<h2 class="section-subtitle">Geolocalización</h2>
 				<div class="section-body">
 					<p class="section-body__ubication"><dfn id="latitude">Latitud: </dfn></p>
@@ -374,7 +426,7 @@
 					</code>
 				</pre>
 			</section>
-			<section class="section-subtitle" id="section-12">
+			<section class="section-12" id="section-12" data-scroll-spy>
 				<h2 class="section-subtitle">Filtro de Búsqueda</h2>
 				<div class="section-body">
 					<input type="text" class="section-body__search" placeholder="Texto a Buscar">
@@ -407,7 +459,7 @@
 					</code>
 				</pre>
 			</section>
-			<section class="section-subtitle" id="section-13">
+			<section class="section-13" id="section-13" data-scroll-spy>
 				<h2 class="section-subtitle">Sorteo Digital</h2>
 				<div class="section-body">
 					<button class="section-body__select-winner" type="button">Haz Clic Para Sortear</button>
@@ -435,7 +487,7 @@
 					</code>
 				</pre>
 			</section>
-			<section class="section-subtitle" id="section-14">
+			<section class="section-14" id="section-14" data-scroll-spy>
 				<h2 class="section-subtitle">Slider Resposive</h2>
 				<div class="section-body">
 					<article class="slider-container">
@@ -479,14 +531,160 @@
 						<span class="slider-containet__arrow" role="left"><</span>
 					</article>
 				</div>
+				<pre class="section-body__not-forget">
+					<code class="lang-js line-numbers">
+						// Recordar
+						const sliderResposive = e => {
+							if(e.target.matches('.slider-containet__arrow')){
+								const $elements = d.querySelectorAll('.slider-element');
+								let positionX = parseInt($elements[0].style.transform.slice(11,-2));
+								let positionMax = (($elements.length - 1) * 100);
+								
+								positionX = isNaN(positionX) ? 0 : positionX;
+								if(e.target.getAttribute('role') === 'left'){
+									if(positionX < 0) $elements.forEach(elem => elem.style.transform = `translateX(${positionX + 100}%)`)
+								}else{
+									console.log(Math.abs(positionX), positionMax)
+									if(Math.abs(positionX) < positionMax) $elements.forEach(elem => elem.style.transform = `translateX(${positionX - 100}%)`)
+								};
+							};
+						};
+					</code>
+				</pre>
 			</section>
-			<section class="section-subtitle" id="section-15">
-				<h2 class="section-subtitle">Sección 15</h2>
+			<section class="section-15" id="section-15" data-scroll-spy>
+				<h2 class="section-subtitle">Scroll Spy</h2>
 				<div class="section-body"></div>
+				<pre class="section-body__not-forget">
+					<code class="lang-js line-numbers">
+						// Recordar
+						const srollSpy = () => {
+							const $sectionElements = d.querySelectorAll('section[data-scroll-spy]');
+							const callback = entries =>{
+								entries.forEach(entry => {
+									const $linkIntersecting = d.querySelector(`a[href="#${entry.target.id}"]`);
+									if(entry.isIntersecting){
+										$linkIntersecting.classList.add('sroll-spy');
+										console.log($linkIntersecting)
+									}else{
+										$linkIntersecting.classList.remove('sroll-spy');
+									}
+								});
+							}
+							const options = {
+								//root: document,
+								//rootMargin: "-490px",
+								threshold: 0.5
+							};
+							const observer = new IntersectionObserver(callback, options);
+							$sectionElements.forEach(section => observer.observe(section));
+						};
+					</code>
+				</pre>
 			</section>
-			<section class="section-subtitle" id="section-16">
-				<h2 class="section-subtitle">Sección 16</h2>
-				<div class="section-body"></div>
+			<section class="section-16" id="section-16" data-scroll-spy>
+				<h2 class="section-subtitle">Video Inteligente</h2>
+				<div class="section-body">
+					<!-- Cover videos random -->
+					<video src="/asset/test.mp4" class="smart-video"a type="video/mp4" loop controls></video>
+				</div>
+				<pre class="section-body__not-forget">
+					<code class="lang-js line-numbers">
+						// Recordar
+						const playOrPause = (video, bool) => bool ? video.play() : video.pause();
+						const smartVideo = () => {
+							const $video = d.querySelector('.smart-video');
+							const cb = entries => playOrPause($video, entries[0].isIntersecting);
+							const observe = new IntersectionObserver(cb, {threshold: 0.9});
+							observe.observe($video);
+						};
+						d.addEventListener('visibilitychange', e => {
+							const $video = d.querySelector('.smart-video');
+							playOrPause($video, !d.hidden)
+						});
+					</code>
+				</pre>
+			</section>
+			<section class="section-17" id="section-17" data-scroll-spy>
+				<h2 class="section-subtitle">Validacíon Formulario</h2>
+				<div class="section-body">
+					<section class="form-container">
+						<h3 class="form-container__title">Envíamnos tus comentarios</h3>
+						<form target="_blank" action="https://formsubmit.co/yaritza.lizana.a@gmail.com" class="contact-form" method="POST">
+							<div class="contact-form__group">
+								<input type="text" class="contact-form__input" pattern="^([a-zA-Z]+\s?){10,255}" name="input-1" placeholder="Nombre" data-type-reg="name" required>
+								<p class="contact-form__alert">Nombre ingresado no valido.</p>
+							</div>
+							<div class="contact-form__group">
+								<input type="email" class="contact-form__input" pattern="(^[a-zA-Z]+\w?(\.|-|_)?\w+)@([a-zA-Z]+\.?){1,}" name="input-2" placeholder="Email" data-type-reg="email" required>
+								<p class="contact-form__alert">Email ingresado no valido.</p>
+							</div>
+							<div class="contact-form__group">
+								<input type="text" class="contact-form__input" pattern="^([a-zA-Z(:|,|.)?]+\s?){10,255}" name="input-3" placeholder="Asunto a tratar" data-type-reg="text" required>
+								<p class="contact-form__alert">Asunto ingresado no valido.</p>
+							</div>
+							<div class="contact-form__group">
+								<textarea class="contact-form__input" rows="4" pattern="^([a-zA-Z(:|,|.)?]+\s?)*{10,}" name="textarea" placeholder="Escribe tus comentarios" data-type-reg="text" required></textarea>
+								<p class="contact-form__alert" data-textarea-sibling>Mensaje ingresado no valido.</p>
+							</div>
+							<button class="contact-form__submit" data-dark type="submit">Enviar</button>
+						</form>
+					</section>
+				</div>
+				<pre class="section-body__not-forget">
+					<code class="lang-js line-numbers">
+						// Recordar
+						// 	https://formsubmit.co/
+					</code>
+				</pre>
+			</section>
+			<section class="section-18" id="section-18" data-scroll-spy>
+				<h2 class="section-subtitle">Narrador</h2>
+				<div class="section-body">
+					<div class="speecher-container">
+						<select name="speecher-container__select" id="" class="speecher-container__select"></select>
+						<textarea name="speecher-container__text" id="" cols="30" rows="10" class="speecher-container__text">
+							https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesis
+						</textarea>
+						<button class="speecher-conatainer__talk">Leer Texto</button>
+					</div>
+				</div>
+				<pre class="section-body__not-forget">
+					<code class="lang-js line-numbers">
+						// Recordar
+						var voices = speechSynthesis.getVoices();
+
+						for(var i = 0; i < voices.length; i++) {
+							var option = document.createElement('option');
+							option.textContent = voices[i].name + ' (' + voices[i].lang + ')';
+					
+							if(voices[i].default) {
+								option.textContent += ' -- DEFAULT';
+							}
+					
+							option.setAttribute('data-lang', voices[i].lang);
+							option.setAttribute('data-name', voices[i].name);
+							document.getElementById("voiceSelect").appendChild(option);
+						}
+						}
+
+						var synth = window.speechSynthesis;
+
+						inputForm.onsubmit = function(event) {
+							event.preventDefault();
+
+							var utterThis = new SpeechSynthesisUtterance(inputTxt.value);
+							var selectedOption = voiceSelect.selectedOptions[0].getAttribute('data-name');
+							for(i = 0; i < voices.length ; i++) {
+								if(voices[i].name === selectedOption) {
+									utterThis.voice = voices[i];
+								}
+							}
+							synth.speak(utterThis);
+							inputTxt.blur();
+						}
+					</code>
+				</pre>
 			</section>
 		</article>
 		<button id="hamburger-button" class="hamburger hamburger--collapse" type="button">
@@ -496,7 +694,7 @@
 		</button>
 	</main>
 	<!-- Personalizado -->
-	<script src="script.js"></script>
+	<script src="/js/script.js" type="module"></script>
 </body>
 
 </html>
