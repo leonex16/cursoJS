@@ -1,0 +1,10 @@
+.section-body__definition{
+	text-align: center;
+	margin-bottom: 1rem;
+}
+
+.section-body__word{
+	text-transform: capitalize;
+	font-weight: 600;
+	font-style: normal;
+}

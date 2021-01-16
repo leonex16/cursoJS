@@ -1,0 +1,12 @@
+.speecher-container{
+  width: 700px;
+  margin: 0 auto 0 auto;
+}
+
+.speecher-container > *{
+  display: block;
+  margin-top: 1rem;
+  width: 100%;
+  padding: 1rem;
+  resize: none;
+}

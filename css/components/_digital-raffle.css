@@ -1,0 +1,15 @@
+.section-body__data-raffle{
+	font-size: 1rem;
+	text-transform: capitalize;
+	margin-bottom: 1rem;
+	text-align: center;
+}
+
+.section-body__select-winner{
+	background-color: #FFF;
+	border: 1px solid;
+	font-weight: bold;
+	padding: .5rem 0;
+	width: 200px;
+	margin: 0 auto;
+}

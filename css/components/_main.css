@@ -1,0 +1,16 @@
+:root{
+	--valid: #32d632;
+	--invalid: #d63232;
+}
+
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Montserrat', sans-serif;
+}
+
+html{
+	scroll-behavior: smooth;
+	overflow-x: hidden;
+}

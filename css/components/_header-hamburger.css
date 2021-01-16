@@ -1,0 +1,133 @@
+.header-container{
+	position: sticky;
+	top: 0;
+	background-color: #FBD720;
+	width: 100vw;
+	z-index: 100;
+}
+
+.header-container__title{
+	text-align: center;
+	padding: 1rem 0;
+	color: #000;
+}
+
+.links-container{
+	display: flex;
+	height: 100vh;
+	flex-direction: column;
+	justify-content: space-evenly;
+}
+
+.link-container{
+	font-family: 'Montserrat', sans-serif;
+	padding: 1rem;
+}
+
+.link-container:hover .link-container__link{
+	color: #000;
+}
+
+.link-container__link{
+	text-decoration: none;
+	font-size: .8rem;
+	color: #222;
+}
+
+.link-container__text{
+	text-align: start;
+}
+
+.menu-layer{
+	position: fixed;
+	top: 72px;
+	z-index: 200;
+	height: 760px;
+	overflow: hidden;
+	overflow-y: auto;
+}
+
+@media (max-width: 1700px){
+	.link-container{
+		font-family: 'Montserrat', sans-serif;
+		padding: 3rem 0;
+	}
+
+	.link-container__link{
+		text-decoration: none;
+		color: #FBD720;
+	}
+	
+	.link-container__text{
+		text-align: center;
+
+	}
+
+	.menu-layer{
+		position: fixed;
+		top: 0;
+		left: -2000px;
+		z-index: 200;
+		overflow-y: auto;  
+		background-color: rgba(0, 0, 0, 0.95);
+		width: 100vw;
+		height: 100vh;  
+	}
+
+	.link-container:hover{
+		background: #FBD720;
+		color: #000;
+	}
+
+	#hamburger-button{
+		display: block !important;
+	}
+}
+
+.main-container{
+	position: relative;
+	max-width: 1000px;
+	margin: 4rem auto 0 auto;
+}
+
+/*
+https://jahertor.com/2014/03/expresiones-regulares-en-selectores-css/ 
+Expresiones regulares en selectores CSS
+	p[id^="col"] { } // Lo que busco es una id que empieza por la cadena "col"
+	p[class$="col"] { } // Lo que busco es una clase que termina por la cadena "col"
+	p[title*="col"] { } // Encuentra la cadena "col" en un title de un párrafo, esté donde esté
+*/
+
+section[class*="section-"]{
+	min-height: 95vh;
+}
+
+.section-subtitle{
+	text-align: center;
+	padding: 1rem 0;
+}
+
+.section-body__not-forget{
+	max-width: 80vw;
+	margin: 2rem auto !important;
+}
+
+#hamburger-button{
+	display: none;
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	background-color: #FBD720;
+	width: 6rem;
+	height: 6rem;
+	margin: 2.5rem;
+	padding: 1.5rem;
+	border-radius: 100%;
+	outline: none;
+	z-index: 300;
+}
+
+@keyframes swipe-lr{
+	from{left: -2000px;}
+	to{left: 0;}
+}

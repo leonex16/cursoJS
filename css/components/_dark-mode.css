@@ -1,0 +1,26 @@
+.dark-mode{
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	border: none;
+	border-radius: 100%;
+	background-color: #FBD720;
+	width: 100px;
+	height: 100px;
+	margin: 2.5rem;
+	z-index: 300;
+	cursor: pointer;
+	transition: opacity .3s, visibility .3s, background-color .3s linear;
+	font-size: 50px;
+	text-shadow: 0 0 10px #000;
+	font-weight: bold;
+}
+
+.dark-mode:hover{
+	background-color: #222222;
+}
+
+.dark-mode--active{
+	background-color: #222222;
+	color: #FBD720;
+}

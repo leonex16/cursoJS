@@ -1,0 +1,35 @@
+.network-message{
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 200;
+	transform: translateY(-100%);
+	transition-property: transform, background-color;
+	transition-duration: .5s;
+	transition-timing-function: linear;
+	width: 100vw;
+	padding: 1rem 0;
+
+	text-align: center;
+	color: #FFF;
+	font-weight: bolder;
+	font-size: 2rem;
+}
+
+.network-container__message--online{
+	background-color: var(--valid);
+	transform: translateY(0);
+}
+
+.network-container__message--online::after{
+	content: 'Conexión Establecida';
+}
+
+.network-container__message--offline{
+	background-color: var(--invalid);
+	transform: translateY(0);
+}
+
+.network-container__message--offline::after{
+	content: 'Conexión Perdida';
+}

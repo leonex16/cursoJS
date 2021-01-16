@@ -1,0 +1,14 @@
+.section-body__ubication{
+	text-align: center;
+	margin-bottom: 1rem;
+}
+
+#latitude,#longitude,#exactly-mts{
+	font-weight: bold;
+	font-style: normal;
+}
+
+.section-body__link-maps{
+	color: #000;
+	text-align: center;
+}

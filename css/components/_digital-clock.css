@@ -1,0 +1,17 @@
+.section-body{
+	display: flex;
+	flex-direction: column;
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+.section-body__clock{
+	font-family: 'Montserrat', sans-serif;
+	font-size: 1.5rem;
+	margin: 1rem auto;
+}
+
+.section-body__btns{
+	display: flex;
+	justify-content: center;
+}
