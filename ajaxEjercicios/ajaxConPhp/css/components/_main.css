@@ -1,0 +1,37 @@
+/* https://ed.team/blog/como-crear-un-tema-light-y-dark-para-tu-web */
+:root{
+  --main-color: hsl(30, 95%, 85%);
+  --title-color: hsl();
+  --text-color: hsl(30, 95%, 40%);
+  --light-text-color: hsla(30, 95%, 40%, .5);
+  --border-color: hsl();
+  --container-color: hsl(0, 0%, 100%);
+  --body-color: hsl(0, 0%, 94%);
+  --size-text: 1rem;
+}
+
+*{
+  font-family: sans-serif;
+  font-size: var(--size-text);
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body{
+  background-color: var(--body-color);
+}
+
+a{
+  color: var(--text-color);
+}
+
+img {
+  width: 100%;
+  height: auto;
+}
+
+.c-container{
+  max-width: 1020px;
+  margin: auto;
+}

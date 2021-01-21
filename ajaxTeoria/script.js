@@ -15,7 +15,7 @@ fetch('https://jsonplaceholder.typicode.com/users')
   });
 })
 .catch(err => console.error('Error desde el catch. Estado %s, Mensaje: %s', err[0], err[1]))
-.finally(() => console.info('Se finaliza el ejercicio.'));
+// .finally(() => console.info('Se finaliza el ejercicio.'));
 
 async function getData(link){
   try {
@@ -31,7 +31,7 @@ async function getData(link){
   } catch (error) {
     console.error(error);
   } finally{
-    console.info('Se finaliza el ejercicio.')
+    // console.info('Se finaliza el ejercicio.');
   };
 }; 
 

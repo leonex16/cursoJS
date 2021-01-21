@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <main class="main-container">
+    <article class="list-employees" style="display: none;">
+      <h1 class="list-employees__title">Trabajadores</h1>
+      <section class="list-employees__api-used">
+        <h2 class="list-employees__subtitle">Fetch</h2>
+        <ol class="list-container" id="fetch"></ol>
+      </section>
+      <section class="list-employees__api-used">
+        <h2 class="list-employees__subtitle">Async Function</h2>
+        <ol class="list-container" id="async"></ol>
+      </section>
+    </article>
+    <article class="users-container">
+      <section class="users-add">
+        <h2 class="users-add__subtitle">Crear Usuario</h2>
+        <form action="" method="" class="users-add__form">
+          <input type="text" class="users-add__input" name="user" placeholder="Usuario">
+          <input type="text" class="users-add__input" name="name" placeholder="Nombre">
+          <input type="text" class="users-add__input" name="email" placeholder="Correo">
+          <input type="text" class="users-add__input" name="city" placeholder="Residencia">
+          <input type="text" class="users-add__input" name="website" placeholder="Sitio Web">
+          <button class="users-add__btn" type="submit">Agregar</button>
+        </form>
+      </section>
+      <!-- CRUD WITHOUT CREATE -->
+      <section class="user-rud">
+        <h2 class="user-rud__subtitle">Listado de Usuarios</h2>
+        <table class="table-container">
+          <thead class="table-container__header">
+            <th class="table-container__col">Usuario</th>
+            <th class="table-container__col">Nombre</th>
+            <th class="table-container__col">Correo</th>
+            <th class="table-container__col">Residencia</th>
+            <th class="table-container__col">Sitio Web</th>
+            <th class="table-container__col">Editar</th>
+            <th class="table-container__col">Borrar</th>
+          </thead>
+        </table>
+      </section>
+    </article>
+  </main>
+  <script src="script.js"></script>
+  <script src="user.js"></script>
+</body>
+</html>
