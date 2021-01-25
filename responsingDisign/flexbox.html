@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Flexbox</title>
+	<style>
+		h2{
+			font-family: sans-serif;
+			text-align: center;
+		}
+		.flex-container{
+			background-color: hsl(0, 0%, 20%);
+			height: 80vh;
+
+			display: flex; /* flex | inline-flex */
+			flex-direction: row; /* row * | row-reverse | column | column-reverse */
+			flex-wrap: nowrap; /* nowrap * | wrap  | wrap-reverse */
+			/* flex-flow: <flex-direction> && <flex-wrap>; */
+			justify-content: flex-start; /* flex-start * | center | space-between (ignora extremos) | spece-around (1:2 espacios extremos) | space-evenly (mismo valor a los extremos) | flex-end */
+			align-items: stretch; /* stretch * | flex-start | center | baseline | flex-end */
+			align-content: flex-start; /* flex-start * | center | space-between (ignora extremos eje Y) | spece-around (1:2 espacios extremos eje Y) | space-evenly (mismo valor a los extremos eje Y) | flex-end  *** IMPORTANTE, SOLO FUNCIONA CON flex-wrap: wrap | wrap-reverse */
+		}
+		.flex-container__item{
+			font-family: sans-serif;
+			text-align: center;
+			background-color: hsl(0, 0%, 60%);
+			color: hsl(0, 0%, 100%);
+			margin: .5rem;
+
+			/* Es el factor de crecimiento respecto a sus hermanos items. No se aceptan negativos */
+			flex-grow: 0; /* 0 */
+			/* Es el factor de reducirse respecto a sus hermanos items. No se aceptan negativos */
+			flex-shrink: 1; /* 1 */
+			flex-basis: auto; /* auto */
+		}
+		.flex-grow-1{
+			flex-grow: 1;
+		}
+		.flex-grow-2{
+			flex-grow: 2;
+		}
+	</style>
+</head>
+<body>
+	<h1>Flexbox</h1>
+	<section class="flex-container">
+		<article class="flex-container__item">item 1</article>
+		<article class="flex-container__item flex-grow-1">item 2</article>
+		<article class="flex-container__item flex-grow-2">item 3</article>
+		<article class="flex-container__item">item 4</article>
+		<article class="flex-container__item">item 5</article>
+		<article class="flex-container__item">item 6</article>
+	</article>
+</body>
+</html>

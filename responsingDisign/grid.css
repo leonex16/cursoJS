@@ -1,0 +1,133 @@
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+  font-family: sans-serif;
+  scroll-behavior: smooth;
+  }
+  *,
+  *::after,
+  *::before {
+  box-sizing: inherit;
+  }
+  a[href="#top"] {
+  margin: 1rem;
+  display: block;
+  font-size: 2rem;
+  text-align: center;
+  text-decoration: none;
+  }
+  p {
+  margin: 0;
+  }
+  h2 {
+  margin-top: 50vh;
+  text-align: center;
+  }
+  img {
+  margin: auto;
+  display: block;
+  max-width: 100%;
+  height: auto;
+  }
+  .menu {
+  margin-bottom: 100vh;
+  font-size: 125%;
+  }
+  .menu li {
+  margin-bottom: 1rem;
+  }
+  .container {
+  margin: 0 auto;
+  width: 80%;
+  height: 80vh;
+  background-color: #222;
+  border: medium solid #000;
+  }
+  .item {
+  padding: 1rem;
+  font-size: 1.25rem;
+  background-color: #666;
+  border: medium solid #999;
+  }
+
+  /* Grid Explicita */
+  .grid-explicit{
+    display: grid; /* grid | inline-grid */
+    /* grid-template-columns: 50% 100px 1fr;
+    grid-template-rows: 2rem 20vh 30%; */
+    grid-template-columns: repeat(4, 25%);
+    grid-template-rows: repeat(5, auto);
+    
+    /* column-gap: 2px;
+    row-gap: 2px; */
+    /* gap: row-gap column-gap; (y, x) */
+  }
+  
+  .grid-explicit .item:nth-child(10){
+    background-color:rebeccapurple;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    grid-column-start: 3;
+    grid-column-end : 5;
+    /* grid-row: start / end; */
+    /* grid-column: start / end; */
+    /* grid-area: grid-row-start / grid-column-start / grid-row-end / grid-column-end; */
+  }
+
+  .grid-explicit .item:nth-child(12){
+    background-color: aqua;
+    grid-row: span 2; /* Abarca desde la posición en la que te encuentres, 2 filas */
+    grid-column: span 3; /* Abarca desde la posición en la que te encuentres, 3 columnas */
+  }
+
+  .grid-explicit .item:nth-child(15){
+    background-color: chartreuse;
+    grid-row: 1 / span 2; /* Empieza en la linea 1 y abarca 2 filas */
+    grid-column: 1 / span 2; /* Empieza en la linea 1 y abarca 2 columnas */
+  }
+
+  /* Grid con Nombres de Línea */
+  .grid-line-names{
+    display: grid;
+    grid-template-columns: [col-1] 1fr [col-2] 1fr [col-3] 1fr [col-4] 1fr;
+    grid-template-rows: [row-1] 1fr [row-2] 1fr [row-3] 1fr [row-4] 1fr;
+  }
+
+  .grid-line-names .item:nth-child(3){
+    background-color: chartreuse;
+    grid-area: row-3 / col-1 / row-4 / col-5;
+  }
+
+  /* Grid con Áreas */
+  .grid-areas{
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    grid-template-rows: 100px 1fr 50px;
+    grid-template-areas: 
+    "header   header"
+    "content  sidebar"
+    "footer   footer";
+  }
+
+  .header{
+    grid-area: header;
+  }
+
+  .content{
+    grid-area: content;
+  }
+
+  .sidebar{
+    grid-area: sidebar;
+  }
+
+  .footer{
+    grid-area: footer;
+  }
+
+  /* Grid Implícita */
+  .grid-implicit{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 150px);
+  }
