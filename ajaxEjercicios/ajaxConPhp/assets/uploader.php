@@ -1,6 +1,5 @@
 <?php
 ini_set('display_errors', '1');
-
 // var_dump($_FILES);
 
 // 'isset' Se utiliza para saber si existe una variable
@@ -33,4 +32,3 @@ if(isset($_FILES["file"])){
     'status' => http_response_code(400)
   ));
 };
-?>

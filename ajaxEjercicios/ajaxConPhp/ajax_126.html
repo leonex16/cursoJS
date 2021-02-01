@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ajax Drag and Drop</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    main{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    progress{
+      margin-top: 1rem;
+    }
+    .drop-zone{
+      margin: 0 auto 0 auto;
+      width: 80%;
+      height: 40vh;
+      border: 2px dotted #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    .drop-zone.is-active{
+      border: thick dashed #000;
+      background-color: rgba(0, 128, 0, .5);
+      animation: pulse 1.5s infinite;
+      animation-timing-function: linear;
+    }
+    @keyframes pulse {
+      0%,100%{transform: scale(1);}
+      50%{transform: scale(1.05);}
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <article class="drop-zone">
+      <p>Arrastra y suelta tus archivos</p>
+    </article>
+  </main>
+  <script src="js/script.js" type="module"></script>
+  <script>
+    let $main = document.querySelector('main');
+    let $dropZone = document.querySelector('.drop-zone');
+    
+    let uploader = file => {
+      let xhr = new XMLHttpRequest();
+      let formData = new FormData();
+
+      formData.append('file', file);
+
+      xhr.addEventListener('readystatechange', e => {
+        if(xhr.readyState !== 4) return;
+        if(xhr.status >= 200 && xhr.status < 300){
+          let json = JSON.parse(xhr.responseText);
+          alert(json.statusText);
+        }else{
+          let message = xhr.statusText || 'Ocurrió un error';
+          console.error('Error %s: %s', xhr.status, message);
+          alert(`Ocurrío un error al subir el archivo ${file.name}`)
+        };
+      });
+
+      xhr.open('POST', './assets/uploader.php');
+      xhr.setRequestHeader('enc-type', 'multipart/form-data');
+
+      xhr.send(formData);
+    };
+
+    let progressUpload = file => {
+      let $progress = document.createElement('progress');
+      let $span = document.createElement('span');
+      let fileReader = new FileReader(); // Permite leer los bits que se esta cargando
+
+      $progress.setAttribute('value', '0');
+      $progress.setAttribute('max', '100');
+
+      $main.insertAdjacentElement('beforeend', $progress);
+      $main.insertAdjacentElement('beforeend', $span);
+
+      fileReader.readAsDataURL(file);
+
+      // Mientras se carga el archivo
+      fileReader.addEventListener('progress', e => {
+        let bitsLoaded = e.loaded;
+        let bitsTotal = e.total;
+        let progress = parseInt((bitsLoaded * 100) / bitsTotal);
+        $progress.value = progress;
+        $span.innerHTML = `${file.name} -- ${progress}%`;
+      });
+      // Cuando se finaliza el archivo
+      fileReader.addEventListener('loadend', e => {
+        uploader(file);
+        $progress.value = 100;
+        $span.innerHTML = `${file.name} -- 100%`;
+      });
+    };
+  
+    // Cuando estas con el archivo encima de la zona drag and drop
+    $dropZone.addEventListener('dragover', e => {
+      e.preventDefault();
+      e.stopPropagation(); // Para que solo la zona drop and drop sea la interactiva. Esto desactiva la prepagación burbuja. Mas info con e.path
+      e.target.classList.add('is-active');
+    });
+
+    // Cuando sales con el archivo encima de la zona drag and drop
+    $dropZone.addEventListener('dragleave', e => {
+      e.target.classList.remove('is-active');
+    });
+
+    // Cuando sueltas archivo encima de la zona drag and drop
+    $dropZone.addEventListener('drop', e => {
+      e.preventDefault();
+      e.stopPropagation(); 
+      let files = Array.from(e.dataTransfer.files);
+      files.forEach(el => progressUpload(el));
+      e.target.classList.remove('is-active');
+    });
+  </script>
+</body>
+</html>

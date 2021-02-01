@@ -1,0 +1,181 @@
+<html lang="es" data-dark>
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Ejercicio 80</title>
+	<!-- Google Fonts - Montserrat -->
+	<link rel="preconnect" href="https://fonts.gstatic.com" />
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;700&display=swap" rel="stylesheet" />
+
+<style>
+:root{
+	--valid: #32d632;
+	--invalid: #d63232;
+}
+
+.main-container{
+  height: calc(100vh - 20px);
+  display: grid;
+  align-content: center;
+}
+
+.form-container{
+  width: 100%;
+  max-width: 500px;
+  margin: auto;
+}
+
+.section-subtitle{
+  text-align: center;
+}
+
+.form-container__title{
+  text-align: center;
+}
+
+.contact-form{
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-form__group{
+  position: relative;
+  height: auto;
+}
+
+.contact-form__input{
+  position: relative;
+  border: 1px solid #2225;
+  margin-top: 1rem;
+  padding: 1rem .5rem;
+  width: 100%;
+  z-index: 1;
+}
+
+.contact-form__input:focus{
+  border: 1.5px solid #222;
+  outline: none;
+}
+
+.contact-form__input:valid{
+  border: 2px solid var(--valid);
+}
+
+/* .contact-form__input:invalid{
+  border: 2px solid var(--invalid);
+} */
+
+.contact-form__alert{
+  position: absolute;
+  top: 10%;
+  z-index: 0;
+  background-color: var(--invalid);
+  font-size: 1.2rem;
+  color: #fff;
+  width: 484px;
+  padding: .5rem;
+  transition: all .1s linear;
+}
+
+.contact-form__alert--error{
+  top: 45%;
+  border: 1px solid var(--invalid);
+}
+
+.contact-form__submit{
+  background-color: #222;
+  border: none;
+  color: #FBD720;
+  font-size: 1.2rem;
+  font-weight: bold;
+  width: 80%;
+  margin: 1rem auto 0 auto;
+  padding: 1rem;
+}
+
+.contact-form__submit:hover{
+  background-color: #FBD720;
+  color: #222;
+}
+</style>
+</head>
+
+<body>
+	<main class="main-container">
+		<article class="article-container">
+			<section class="section-17" id="section-17" data-scroll-spy>
+				<h2 class="section-subtitle">Validacíon Formulario</h2>
+				<div class="section-body">
+					<section class="form-container">
+						<h3 class="form-container__title">Envíamnos tus comentarios</h3>
+						<form target="_blank" action="" class="contact-form" method="POST">
+							<div class="contact-form__group">
+								<input type="text" class="contact-form__input" pattern="^([a-zA-Z]+\s?){10,255}" name="nombre" placeholder="Nombre" data-type-reg="name" required>
+								<p class="contact-form__alert">Nombre ingresado no valido.</p>
+							</div>
+							<div class="contact-form__group">
+								<input type="email" class="contact-form__input" pattern="(^[a-zA-Z]+\w?(\.|-|_)?\w+)@([a-zA-Z]+\.?){1,}" name="email" placeholder="Email" data-type-reg="email" required>
+								<p class="contact-form__alert">Email ingresado no valido.</p>
+							</div>
+							<div class="contact-form__group">
+								<input type="text" class="contact-form__input" pattern="^([a-zA-Z(:|,|.)?]+\s?){10,255}" name="asunto" placeholder="Asunto a tratar" data-type-reg="text" required>
+								<p class="contact-form__alert">Asunto ingresado no valido.</p>
+							</div>
+							<div class="contact-form__group">
+								<textarea class="contact-form__input" rows="4" pattern="^([a-zA-Z(:|,|.)?]+\s?)*{10,255}" name="comentario" placeholder="Escribe tus comentarios" data-type-reg="text" required></textarea>
+								<p class="contact-form__alert" data-textarea-sibling>Mensaje ingresado no valido.</p>
+							</div>
+							<button class="contact-form__submit" data-dark type="submit">Enviar</button>
+						</form>
+					</section>
+				</div>
+      </section>
+    </article>
+	</main>
+	<script>
+    let $form = document.querySelector('.contact-form');
+    let $formGroups = document.querySelectorAll('.contact-form__group');
+    let expReg = {
+      name: new RegExp('^([a-zA-Z]+\s?){10,255}'),
+      email: new RegExp('(^[a-zA-Z]+\w?(\.|-|_)?\w+)@([a-zA-Z]+\.?){1,}'),
+      text: new RegExp('^([a-zA-Z(:|,|.)?]+\s?){10,255}')
+    };
+    const validValue = ($p,reg, val) => {
+      const height = $p.getAttribute('data-textarea-sibling') === ''
+        ? '220px'
+        : '110px';
+      if(!reg.test(val) && val.length < 10){
+        $p.classList.add('contact-form__alert--error');
+        $p.parentElement.style.height = height;
+      }else{
+        $p.classList.remove('contact-form__alert--error');
+        $p.parentElement.style.height = 'auto';
+      };
+    };
+    const contactForm = () => {
+      $formGroups.forEach(div => {
+        div.firstElementChild.addEventListener('blur', e => {
+          let typeReg = e.target.getAttribute('data-type-reg');
+          let inputVal = e.target.value;
+          validValue(e.target.nextElementSibling, expReg[typeReg], inputVal);
+        });
+      });
+    };
+    document.addEventListener('DOMContentLoaded', contactForm);
+    $form.addEventListener('blur', contactForm);
+    document.addEventListener('submit', e => {
+      e.preventDefault();
+      let options = {
+        method: 'POST',
+        body: new FormData(e.target)
+      };
+      fetch('https://formsubmit.co/ajax/yaritza.lizana.a@gmail.com', options)
+      .then(response => response.ok ? response.json() : Promise.reject(response))
+      .then(json => console.log(json))
+      .catch(error => console.log(`HA OCURRIDO UN ERROR: ${error}`))
+    });
+  </script>
+</body>
+
+</html>

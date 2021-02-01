@@ -55,7 +55,7 @@
     let progressUpload = file => {
       let $progress = document.createElement('progress');
       let $span = document.createElement('span');
-      let fileReader = new FileReader(); // Permito leer los bits que se esta cargando
+      let fileReader = new FileReader(); // Permite leer los bits que se esta cargando
 
       $progress.setAttribute('value', '0');
       $progress.setAttribute('max', '100');
@@ -69,22 +69,24 @@
       fileReader.addEventListener('progress', e => {
         let bitsLoaded = e.loaded;
         let bitsTotal = e.total;
-        console.log(bitsLoaded, bitsTotal,e)
         let progress = parseInt((bitsLoaded * 100) / bitsTotal);
         $progress.value = progress;
         $span.innerHTML = `${file.name} -- ${progress}%`;
       });
       // Cuando se finaliza el archivo
       fileReader.addEventListener('loadend', e => {
-
+        uploader(file);
+        $progress.value = 100;
+        $span.innerHTML = `${file.name} -- 100%`;
       });
     };
 
+    // Cuando se cargan los archivos en el input, "change" reacciona a estas archivos 
     document.addEventListener('change', e => {
       if(e.target === $files){
         let files = Array.from(e.target.files);
-        files.forEach(elemnt => {
-          progressUpload(elemnt);
+        files.forEach(element => {
+          progressUpload(element);
           // uploader(elemnt);
         });
       }
