@@ -1,0 +1,38 @@
+<html lang="es" data-dark>
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Ejercicio 130</title>
+	<!-- Google Fonts - Montserrat -->
+	<link rel="preconnect" href="https://fonts.gstatic.com" />
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;700&display=swap" rel="stylesheet" />
+
+<style>
+  *{
+    font-family: 'Montserrat';
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .main-container{
+    max-width: 1020px;
+    margin: auto;
+  }
+
+  
+</style>
+</head>
+
+<body>
+	<main class="main-container"></main>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js" integrity="sha512-L03kznCrNOfVxOUovR6ESfCz9Gfny7gihUX/huVbQB9zjODtYpxaVtIaAkpetoiyV2eqWbvxMH9fiSv5enX7bw==" crossorigin="anonymous"></script>
+<script>
+  let $main = document.querySelector('main');
+  fetch('assets/ajax_130.md')
+    .then(res => res.text())
+    .then(text => $main.innerHTML = new showdown.Converter().makeHtml(text));
+</script>
+</html>

@@ -9,29 +9,157 @@
 	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;700&display=swap" rel="stylesheet" />
 
 <style>
+  *{
+    font-family: 'Montserrat';
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .main-container{
+    max-width: 1020px;
+    margin: auto;
+  }
+
+  .items-container{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+  }
+
+  .items-container__title{
+    text-align: center;
+    flex-basis: 100%;
+    margin-top: 1rem;
+  }
+
+  .items-container__item{
+    outline: 2px solid #222;
+    width: 250px;
+    margin: 1rem;
+    padding: 1rem;
+
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .item-product{
+    text-align: center;
+  }
+
+  .item-product__image{
+    width: 200px;
+    height: 200px;
+  }
+
+  .item-product__title{
+    text-align: center;
+    min-height: 50px;
+    margin-top: 1rem;
+  }
+
+  .item-product__description{
+    height: 100px;
+    overflow-y: auto;
+    flex-grow: 2;
+  }
+
+  .item-buy{
+    margin-top: 1rem;
+    padding: .5rem;
+    background-color: #222;
+    color: #eee;
+    font-weight: bold;
+  }
 
 </style>
 </head>
 
 <body>
 	<main class="main-container">
-    <section class="items-contaiter">
+    <section class="items-container">
       <h2 class="items-container__title">Items</h2>
-      <article class="items-container__item">
-        
-      </article>
     </section>
+    <div class=""></div>
   </main>
-  <!-- SDK of Commerce.js -->
-  <script type="text/javascript" src="https://cdn.chec.io/v2/commerce.js"></script>
+  <template class="item-template">
+    <article class="items-container__item">
+      <figure class="item-product">
+        <img src="" alt="" class="item-product__image" >
+        <figcaption class="item-product__detail">
+          <h3 class="item-product__title"></h3>
+          <p class="item-product__description"></p>
+        </figcaption>
+      </figure>
+      <button class="item-buy">Buy</button>
+    </article>
+  </template>
 	<script>
-    const TRANSBANK_KEYS = {public: '', private: ''};
-    let $fragment = document.createDocumentFragment();
-    // let $itemTemplate = document.querySelector('.');
-    console.log(new Commerce())
-    fetch()
-    .then()
-    .catch()
+
+    // ====================== CREAR ITEMS ====================== //
+    let $itemTemplate = document.querySelector('.item-template').content;
+    let getItem = itemsCant => {
+      while(0 < itemsCant){
+        fetch(`https://www.thecocktaildb.com/api/json/v1/1/random.php`)
+        .then(response => {
+          if(!response.ok) throw 'Error en OK';
+          return response.json();
+        })
+        .then(json => insertItem(json.drinks[0]))
+        .catch(err => console.log(`catch ${err}`));
+        itemsCant--;
+      };
+    };
+    
+    let insertItem = obj => {
+      $itemTemplate.querySelector('h3').textContent = obj.strDrink;
+      $itemTemplate.querySelector('img').src = obj.strDrinkThumb;
+      $itemTemplate.querySelector('p').textContent = obj.strInstructions;
+      $itemTemplate.querySelector('button').setAttribute('data-id', obj.idDrink);
+      $clone = document.importNode($itemTemplate, true);
+      document.querySelector('.items-container').appendChild($clone);
+    };
+    
+    getItem(5);
+    // ====================== CREAR ITEMS ====================== //
+
+    // ================= TRANSACCIÓN TRANSBANK ================= //
+    const TRANSBANK_KEYS = {
+      commerceCod: '597055555530',
+      secret: '579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C'
+    };
+    let headers = new Headers({
+      'Tbk-Api-Key-Id': TRANSBANK_KEYS.commerceCod,
+      'Tbk-Api-Key-Secret': TRANSBANK_KEYS.secret,
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      'mode': 'same-origin'
+    });
+    let options = {
+      method: 'POST',
+      headers: headers,
+      body: {
+        "buy_order": "12",
+        "session_id": "11",
+        "amount": 10000,
+        "cvv": 123,
+        "card_number": "4051885600446623",
+        "card_expiration_date": "22/10"
+      }
+    };
+    let tbkPost = async () => {
+      let response = await fetch('https://webpay3gint.transbank.cl/rswebpaytransaction/api/webpay/v1.0/transactions', options);
+      console.log(response);
+    };
+    // tbkPost();
+    
+    // https://es.stackoverflow.com/questions/415773/problemas-de-cors-al-llamar-a-https-webpay3gint-transbank-cl-desde-angular
+    // La API no esta hecha para ser llamada desde un front-end directamente. Expones el API-key y por sobre todo el API-Key-Secret, con lo que cualquier persona podría usar dichos datos para generar transacciones, sobre todo con la API de producción
+    // Nunca dejes tu código de comercio y secreto compartido directamente en tu código, te recomendamos utilizar variables de entorno u otro método que te permita mantener tus credenciales seguras. https://www.transbankdevelopers.cl/referencia/webpay?l=http#configuracion-para-produccion-utilizando-los-sdk
+    // La solución es usar directamente un backend para tus transacciones, o como minimo, un proxy implementando la API que esconda dichos datos y puedas llamar desde el front-end.
+    // Si no dispones de un servidor backend propio puedes implementarlo en cualquiera de los lenguajes que se indican (PHP Java Ruby .NET Python) y utilizar algún servicio como Heroku para poner en marcha el servicio de manera dinámica/a petición.
+
   </script>
 </body>
 

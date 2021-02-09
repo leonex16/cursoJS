@@ -1,0 +1,188 @@
+<html lang="es" data-dark>
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Ejercicio 133</title>
+	<!-- Google Fonts - Montserrat -->
+	<link rel="preconnect" href="https://fonts.gstatic.com" />
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;700&display=swap" rel="stylesheet" />
+
+<style>
+  *{
+    font-family: 'Montserrat';
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+  }
+
+  .main-container{
+    max-width: 1020px;
+    margin: auto;
+  }
+
+  body{
+    background-color:#011;
+  }
+
+  .loader{
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+  }
+
+  .main-container{
+    display: grid;
+  }
+
+  .search-container{
+    text-align: center;
+    color: #eef;
+  }
+
+  .results-container__result{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+  }
+
+  .artist-container__image{
+    width: 300px;
+    float: left;
+    margin: 1rem;
+  }
+
+  .artist-container__artist{
+    text-align: center;
+    color: #eef;
+  }
+
+  .artist-container__description{
+    text-align: justify;
+    margin: 1rem;
+    color: #eef;
+  }
+
+  .lyrics-container__title{
+    text-align: center;
+    color: #eef;
+  }
+
+  .search-container__field{
+    display: block;    
+    width: 250px;
+    margin: .5rem auto .5rem auto;
+  }
+
+  .search-container__search{
+      display: block;
+      width: 250px;
+      margin: .5rem auto .5rem auto;
+  }
+
+  .lyrics-container__title{
+    text-transform: capitalize;
+  }
+
+  .lyrics-container__lyrics{
+    margin: 1rem;
+    color: #eef;
+  }
+
+  .not-found{
+    text-align: center;
+    color: #eef;
+    text-decoration: underline;
+  }
+
+</style>
+</head>
+
+<body>
+	<main class="main-container">
+    <section class="search-container">
+      <h2 class="search-container__title">AudioDB && Lyrics ovh</h2>
+      <input type="search" class="search-container__field" placeholder="Artist name">
+      <input type="search" class="search-container__field" placeholder="Song name">
+      <button class="search-container__search">Search</button>
+    </section>
+    <article class="results-container"></article>
+  </main>
+  <template class="result-template">
+    <section class="results-container__result">
+      <section class="artist-container">
+        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80" alt="" class="artist-container__image">
+        <h3 class="artist-container__artist"></h3>
+        <p class="artist-container__description"></p>
+      </section>
+      <section class="lyrics-container">
+        <h3 class="lyrics-container__title"></h3>
+        <pre class="lyrics-container__lyrics"></pre>
+      </section>
+    </section>
+  </template>
+</body>
+<script>
+  let $resultsContainer = document.querySelector('.results-container');
+  let $btnSearch = document.querySelector('.search-container__search');
+  let $resultTemplate = document.querySelector('.result-template').content;
+  
+  async function getArtistLyrics(artist, song){
+    let $clone = document.importNode($resultTemplate, true);
+    let responses = await Promise.all([
+      fetch(`https://theaudiodb.com/api/v1/json/1/search.php?s=${artist.toLowerCase()}`),
+      fetch(`https://api.lyrics.ovh/v1/${artist.toLowerCase()}/${song.toLowerCase()}`)
+    ]);
+    if(!responses[0].ok) return console.log('Error Artist');
+    console.log(responses)
+    let artistData = await responses[0].json();
+    let lyricsData = await responses[1].json();
+
+    $resultsContainer.innerHTML = '';
+    insertArtist(artistData, insertLyrics(lyricsData, song.toLowerCase(), $clone));
+
+    $resultsContainer.appendChild($clone);
+  };
+
+  function insertArtist(obj, $elem){
+    if(obj.artists){
+      $elem.querySelector('.artist-container__image').alt = obj.artists[0].strArtist;
+      $elem.querySelector('.artist-container__image').src = obj.artists[0].strArtistThumb;
+      $elem.querySelector('.artist-container__artist').textContent = obj.artists[0].strArtist;
+      $elem.querySelector('.artist-container__description').textContent = obj.artists[0].strBiographyEN;
+    }else{
+      $resultsContainer.innerHTML = '<h2 class="not-found">Artist not found. (Yet)</h2>';
+    };
+  };
+
+  function insertLyrics(obj, song, $elem){
+    if(obj.lyrics){
+      $elem.querySelector('.lyrics-container__title').textContent = song;
+      $elem.querySelector('.lyrics-container__lyrics').innerHTML = obj.lyrics;
+    }else{
+      $elem.querySelector('.lyrics-container').innerHTML = '<h2 class="not-found">Lyrics not found. (Yet)</h2>';
+    };
+
+    return $elem;
+  };  
+
+  function insertLoader(){
+    let $loader = document.createElement('img');
+    $resultsContainer.innerHTML = '';
+    $loader.src = 'assets/svg-loaders/audio.svg';
+    $loader.alt = 'Cargando...';
+    $loader.classList.add('loader');
+    $resultsContainer.appendChild($loader);
+  };
+
+  $btnSearch.addEventListener('click', e => {
+    let $inputs = document.querySelectorAll('.search-container__field');
+    insertLoader();
+    getArtistLyrics($inputs[0].value, $inputs[1].value ? $inputs[1].value : 'na');
+  });
+</script>
+</html>

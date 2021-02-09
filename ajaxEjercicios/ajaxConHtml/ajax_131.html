@@ -1,0 +1,166 @@
+<html lang="es" data-dark>
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Ejercicio 131</title>
+	<!-- Google Fonts - Montserrat -->
+	<link rel="preconnect" href="https://fonts.gstatic.com" />
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;700&display=swap" rel="stylesheet" />
+
+<style>
+  *{
+    font-family: 'Montserrat';
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .main-container{
+    max-width: 1020px;
+    margin: auto;
+  }
+
+  body{
+    background-color: hsl(132, 60%, 40%);
+  }
+
+  .arrow{
+    width: 164px;
+    margin: 1rem auto 0 auto;
+  }
+
+  .arrow__left, .arrow__right{
+    background-color: inherit;
+    outline: none;
+    font-weight: bold;
+    font-size: 2rem;
+    border: 2px solid hsla(132, 60%, 10%, 0.2);
+    border-radius: 5px;
+    margin: 1rem;
+    padding: .1rem;
+    cursor: pointer;
+  }
+
+  .pokemons-container{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    height: 90%;
+  }
+
+  .pokemons-container__loader{
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    width: 150px;
+  }
+  
+  .pokemons-container__pokemon{
+    flex: 1 1 150px;
+    border: 1px solid hsla(132, 60%, 40%, 0.2);
+    border-radius: 50px;
+    margin: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .pokemons-container__pokemon{
+    box-shadow: 6px 6px 20px 0 rgba(0, 0, 0, 0.25), -4px -4px 20px 0 rgba(255, 255, 255, 0.25);
+  }
+
+  .pokemons-container__image{
+    text-align: center;
+  }
+
+  .pokemons-container__name{
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #eee;
+    margin-bottom: 1rem;
+    text-transform: capitalize;
+  }
+
+</style>
+</head>
+
+<body>
+	<main class="main-container">
+    <nav class="arrow">
+      <span class="arrow__left"><<</span>
+      <span class="arrow__right">>></span>
+    </nav>
+    <article class="pokemons-container">
+      <img src="assets/svg-loaders/ball-triangle.svg" alt="" class="pokemons-container__loader">
+    </article>
+  </main>
+  <template class="pokemon-template">
+    <figure class="pokemons-container__pokemon">
+      <img src="" alt="" class="pokemons-container__image">
+      <figcaption class="pokemons-container__name"></figcaption>
+    </figure>
+  </template>
+</body>
+<script>
+  let $main = document.querySelector('.pokemons-container');
+  let $pokemonTemplate = document.querySelector('template').content;
+  let $prev = document.querySelector('.arrow__left');
+  let $next = document.querySelector('.arrow__right');
+  let pokeApi = 'https://pokeapi.co/api/v2/pokemon/';
+
+  async function getPokemons(url){
+    try {
+      toggleLoader();
+      let response = await fetch(url);
+      let json = await response.json();
+      let pokemonArray = json.results;
+
+      $prev.setAttribute('data-url', !(json.previous === null) ? json.previous : '#');
+      $next.setAttribute('data-url', !(json.next === null) ? json.next : '#');
+
+      pokemonArray.forEach(pokemon => {
+        fetch(pokemon.url)
+          .then(res => res.json())
+          .then(json => insertPokemon(pokemon.name, json.sprites.front_default))
+          .catch(err => console.log(err))
+      });
+      toggleLoader(1);
+    } catch (error) {
+      console.log(error);
+    };
+  };
+
+  function insertPokemon(name, photo){
+    $pokemonTemplate.querySelector('img').src = photo;
+    $pokemonTemplate.querySelector('figcaption').textContent = name;
+    $main.appendChild(document.importNode($pokemonTemplate, true));
+  };
+
+  function toggleLoader(signal = 1){
+    let $loader = document.querySelector('.pokemons-container__loader');
+    let $pokemonFigure = document.querySelectorAll('.pokemons-container__pokemon');
+    if($pokemonFigure.length > 0){
+      if(signal === 1) $pokemonFigure.forEach(fig => fig.remove());
+      $loader.style.display = 'block';
+    }else{
+      $loader.style.display = 'none';
+    };
+
+  };
+
+  document.addEventListener('click', e => {
+    if(e.target.matches('.arrow__left') || e.target.matches('.arrow__right')){
+      e.preventDefault();
+      if(e.target.getAttribute('data-url') !== '#') getPokemons(e.target.getAttribute('data-url'));
+    };
+  });
+
+  document.addEventListener('DOMContentLoaded', () => getPokemons(pokeApi));
+
+</script>
+</html>

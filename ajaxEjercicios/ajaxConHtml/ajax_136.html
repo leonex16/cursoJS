@@ -1,0 +1,166 @@
+<html lang="es" data-dark>
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Ejercicio 132</title>
+	<!-- Google Fonts - Montserrat -->
+	<link rel="preconnect" href="https://fonts.gstatic.com" />
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;700&display=swap" rel="stylesheet" />
+
+<style>
+  *{
+    font-family: 'Montserrat';
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+  }
+
+  .main-container{
+    max-width: 1020px;
+    margin: auto;
+  }
+
+  body{
+    background-color:#eef;
+  }
+
+  .search-container__title{
+    text-align: center;
+  }
+  
+  .search-container__field{
+    display: block;
+    margin: auto;
+  }
+
+  .search-container__loader{
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    padding:1rem;
+    border-radius: 10px;
+    background-color: #ddd9;
+  }
+
+  .items-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    justify-items: center;
+    column-gap: .3rem;
+  }
+
+  .items-container__item{
+    border: 1px solid #dd9;
+    border-radius: 10px;
+    width: 250px;
+    padding: 1rem;
+  }  
+
+  .items-container__image{
+    text-align: center;
+    max-width: 210px;
+  }
+
+  .items-container__name{
+    text-align: center;
+    font-weight: bold;
+  }
+
+  .items-container__summary{
+    text-align: justify;
+    height: 200px;
+    overflow-y: auto;
+  }
+
+  .items-container__language{
+    text-align: center;
+    font-weight: bold;
+  }
+
+  .items-container__language span{
+    font-weight: normal;
+  }
+
+</style>
+</head>
+
+<body>
+	<main class="main-container">
+    <section class="search-container">
+      <h1 class="search-container__title">Tvmaze</h1>
+      <input type="search" class="search-container__field" placeholder="Search Here">
+      <img src="assets/svg-loaders/grid.svg" alt="" class="search-container__loader">
+    </section>
+    <article class="items-container">
+    </article>
+  </main>
+  <template class="items-template">
+    <figure class="items-container__item">
+      <img src="" alt="" class="items-container__image">
+      <figcaption class="items-container__details">
+        <p class="items-container__name"></p>
+        <p class="items-container__summary"></p>
+        <p class="items-container__language">Language: <span></span> </p>
+      </figcaption>
+    </figure>
+  </template>
+</body>
+<script>
+  let valueInputSearch = document.querySelector('.search-container__field');
+  let $itemContainer = document.querySelector('.items-container');
+  let $showTemplate = document.querySelector('.items-template').content;
+
+  async function searchTvMaze(text = 'dragon'){
+    try {
+      showLoader(1);
+      let response = await fetch(`http://api.tvmaze.com/search/shows?q=${text}`);
+      let json = await response.json();
+      json.forEach(result => {
+        let dataShow = {
+          name: result.show.name,
+          summary: result.show.summary !== null ? htmlToText(result.show.summary) : 'Summary not available',
+          lang: result.show.language !== null ? result.show.language  : 'Language not available',
+          img: result.show.image !== null ? result.show.image.medium  : 'https://lh3.googleusercontent.com/proxy/QtetEC0NC_OdE-BEjOJC4pMnxBqeDqZjZxVy-BRuNISAXwm8mzmPUu2EgoVB3Y7_HM2KSsI97R5t5jERgIu9EWG37kQC'
+        };
+        insertShow(dataShow);
+      });
+      showLoader(0);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  function insertShow(dataShow){
+    $showTemplate.querySelector('.items-container__image').src = dataShow.img;
+    $showTemplate.querySelector('.items-container__image').alt = dataShow.name;
+    $showTemplate.querySelector('.items-container__name').textContent = dataShow.name;
+    $showTemplate.querySelector('.items-container__summary').textContent = dataShow.summary;
+    $showTemplate.querySelector('.items-container__language span').textContent = dataShow.lang;
+    $itemContainer.appendChild(document.importNode($showTemplate, true));
+  };
+
+  function showLoader(bool = 0){
+    let $figures = document.querySelectorAll('figure');
+    let $loader = document.querySelector('.search-container__loader');
+    if($figures.length > 0){
+      if(bool === 1) $figures.forEach($figure => $figure.remove());
+      $loader.style.display = 'none';
+    }else{
+      $loader.style.display = 'block';
+      if($figures.length === 0) $loader.style.display = 'none';
+    }
+
+  };
+
+  let htmlToText = str => str.replace(/<\/?\w*\/?\w*>/gm, '');
+
+  valueInputSearch.addEventListener('keyup', e => searchTvMaze(e.target.value));
+</script>
+</html>
