@@ -1,0 +1,113 @@
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Ejercicio 138</title>
+	<!-- Google Fonts - Montserrat -->
+	<link rel="preconnect" href="https://fonts.gstatic.com" />
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;700&display=swap" rel="stylesheet" />
+
+<style>
+  *{
+    font-family: 'Montserrat';
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+  }
+
+  .main-container{
+    max-width: 1020px;
+    margin: auto;
+  }
+
+  body{
+    background-color:#011;
+  }
+
+  .loader{
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+  }
+
+  .main-container{
+    /* display: grid; */
+  }
+
+  select{
+    display: block;
+    width: 100%;
+    font-size: 1.5rem;
+    padding: 1rem;
+  }
+</style>
+</head>
+
+<body>
+	<main class="main-container">
+    <select name="" id="" class="state-select">
+      <option value="0" selected>State</option>
+    </select>
+    <select name="" id="" class="municipality-select">
+      <option value="0" selected disabled>Municipality</option>
+    </select>
+  </main>
+</body>
+<script>
+  let $selects = document.querySelectorAll('select');
+  let $fragment = document.createDocumentFragment();
+
+  let fillStatesSelect = async () => {
+    let response = await fetch('https://api-sepomex.hckdrk.mx/query/get_estados');
+    let json = await response.json();
+    for (let index = 0; index < json.response.estado.length; index++) {
+      let $option = document.createElement('option');
+      $option.value = index + 1;
+      $option.textContent = json.response.estado[index];
+      $fragment.appendChild($option);
+    };
+    $selects[0].appendChild($fragment);
+  };
+
+  let fillMunicipalitySelect = async stateName => {
+    let response = await fetch(`https://api-sepomex.hckdrk.mx/query/get_municipio_por_estado/${stateName}`);
+    let json = await response.json();
+    Array.from($selects[1].children).forEach(opt => opt.remove());
+    for (let index = 0; index < json.response.municipios.length; index++) {
+      let $option = document.createElement('option');
+      $option.value = index + 1;
+      $option.textContent = json.response.municipios[index];
+      $fragment.appendChild($option);
+    };
+    let $option = document.createElement('option');
+    $option.value = 0;
+    $option.textContent = 'Municipality';
+    $option.selected = true;
+    $option.disabled = true;
+
+    $selects[1].appendChild($option);
+    $selects[1].appendChild($fragment);
+  };
+
+  function insertLoader(){
+    let $loader = document.createElement('img');
+    $resultsContainer.innerHTML = '';
+    $loader.src = 'assets/svg-loaders/audio.svg';
+    $loader.alt = 'Cargando...';
+    $loader.classList.add('loader');
+    $resultsContainer.appendChild($loader);
+  };
+
+  $selects[0].addEventListener('change', e => {
+    fillMunicipalitySelect(e.target.selectedOptions[0].textContent);
+  });
+
+  document.addEventListener('DOMContentLoaded', fillStatesSelect);
+</script>
+</html>

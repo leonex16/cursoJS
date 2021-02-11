@@ -1,0 +1,248 @@
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Ejercicio 139, 140, 141, 142, 143</title>
+	<!-- Google Fonts - Montserrat -->
+	<link rel="preconnect" href="https://fonts.gstatic.com" />
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;700&display=swap" rel="stylesheet" />
+
+<style>
+  *{
+    font-family: 'Montserrat';
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+  }
+
+  .main-container{
+    max-width: 1020px;
+    margin: auto;
+  }
+
+  body{
+    background-color:#eff;
+  }
+
+  body{
+  box-sizing: border-box;
+  font-size: 1rem;
+}
+
+a{
+  color: hsl(220, 100%, 50%);
+  transition: opacinty .3s ease-out;
+}
+
+a:hover{
+  opacity: .75
+}
+
+img{
+  max-width: 100%;
+  height: auto;
+}
+
+h1,h2{
+  text-align: center;
+}
+
+hr{
+  border: 1px solid hsl(200, 100%, 50%);
+  margin: 3rem auto;
+}
+
+.site{
+  text-align: center;
+  margin: 1rem auto;
+  padding: 1rem;
+  border-radius: .5rem;
+  max-width: 80%;
+  background-color: hsl(0, 0%, 100%);
+}
+
+aside figure, aside small, aside a{
+  display: block;
+  margin: .5rem auto;
+  text-align: center;
+}
+
+aside div ul li{
+  list-style-type: circle;
+  text-transform: capitalize;
+  margin-left: 1.5rem;
+}
+
+.post-author img{
+  border-radius: 50%;
+}
+
+.post-date{
+  display: block;
+  margin: 1rem auto;
+}
+
+.post-excerpt,
+.post-categories,
+.post-tags,
+.post-content{
+  text-align: justify;
+}
+
+.post-content summary{
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+.post-content article{
+  background-color: hsl(0, 0%, 100%);
+  padding: 1rem;
+}
+
+.post-content img{
+  display: block;
+  margin: 1rem auto;
+}
+
+  .loader{
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+
+    background-color: cadetblue;
+    border-radius: 100%;
+    padding: 1rem;
+  }
+
+  .main-container{
+    /* display: grid; */
+  }
+
+</style>
+</head>
+
+<body>
+	<main class="main-container">
+    <h1>WordPress</h1>
+    <article id="site" class="site"></article>
+    <section id="posts" class="posts"></section>
+    <img src="assets/svg-loaders/circles.svg" alt="Cargando..." class="loader"/>
+    <template>
+      <article class="post">
+        <img src="" alt="" class="post-image">
+        <aside>
+          <h2 class="post-title"></h2>
+          <figure class="post-author"></figure>
+          <small class="post-date"></small>
+          <a href="" class="post-link" target="_blank">Ver publicación original</a>
+          <p class="post-excerpt"></p>
+          <div class="post-categories"><p>Categorías:</p><ul></ul></div>
+          <div class="post-tags"><p>Etiquetas:</p><ul></ul></div>
+          <details class="post-content">
+            <summary>Ver contenido de la publicación</summary>
+            <article></article>
+          </details>
+        </aside>
+      </article>
+      <hr>
+    </template>
+  </main>
+</body>
+<script>
+  let $site = document.querySelector('#site');
+  let $posts = document.querySelector('#posts');
+  let $loader = document.querySelector('.loader');
+  let $template = document.querySelector('template').content;
+  let $fragment = document.createDocumentFragment();
+  let domain = 'https://css-tricks.com';
+  let site = `${domain}/wp-json`;
+  let apiWp = `${site}/wp/v2`;
+  let posts = `${apiWp}/posts?_embed`;
+  let categories = `${apiWp}/categories`;
+  let pages = `${apiWp}/pages`;
+  let page = 1;
+  let postsLoad = 10;
+
+  function getSiteData(){
+    fetch(site)
+      .then(res => res.ok ? res.json() : Promise.reject(res))
+      .then(json => {
+        $site.innerHTML = `
+        <h3>Sitio Web</h3>
+        <h2>
+          <a href="${json.url}" target="_blank">${json.name}</a>
+        </h2>
+        <p>${json.description}</p>
+        <p>${json.timezone_string}</p>
+        `;
+      })
+      .catch(err => {
+        console.error(err);
+        let message = err.statusText || 'Ocurrió un error';
+        $site.innerHTML = `<p>Error ${err.status}: ${message}</p>`;
+      });
+  };
+
+  function getPosts(){
+    fetch(`${posts}&page=${page}&per_page=${postsLoad}`)
+      .then(res => res.ok ? res.json() : Promise.reject(res))
+      .then(json => {
+        console.log(json)
+        json.forEach(el => {
+          $template.querySelector('.post-image').src = el._embedded['wp:featuredmedia'][0].source_url;
+          $template.querySelector('.post-image').alt = el._embedded['wp:featuredmedia'][0].alt_text || el.title.rendered;
+          $template.querySelector('.post-title').innerHTML = el.title.rendered;
+          $template.querySelector('.post-author').innerHTML = `
+          <img src="${el._embedded.author[0].avatar_urls['96']}" alt="${el._embedded.author[0].name}">
+          <figcaption>${el._embedded.author[0].name}</figcaption>
+          `;
+          $template.querySelector('.post-date').innerHTML = new Date(el.date).toLocaleDateString();
+          $template.querySelector('.post-link').href = el.guid.rendered;
+          $template.querySelector('.post-excerpt').innerHTML = el.excerpt.rendered.replace('[&hellip;]', '...');
+          el._embedded['wp:term'][0].forEach(categories => $template.querySelector('.post-categories ul').innerHTML += `<li>${categories.name}</li>`);
+          el._embedded['wp:term'][1].forEach(tag => $template.querySelector('.post-tags ul').innerHTML += `<li>${tag.name}</li>`);
+          $template.querySelector('.post-content article').innerHTML = el.content.rendered;
+          $fragment.appendChild(document.importNode($template, true))
+        });
+
+        $posts.appendChild($fragment);
+        $loader.style.display = 'none';
+      })
+      .catch(err => {
+        console.error(err);
+        let message = err.statusText || 'Ocurrió un error';
+        $posts.innerHTML = `<p>Error ${err.status}: ${message}</p>`;
+        $loader.style.display = 'none';
+      });
+  };
+
+  function insertLoader(){
+    let $loader = document.createElement('img');
+    $resultsContainer.innerHTML = '';
+    $loader.src = 'assets/svg-loaders/audio.svg';
+    $loader.alt = 'Cargando...';
+    $loader.classList.add('loader');
+    $resultsContainer.appendChild($loader);
+  };
+
+  document.addEventListener('DOMContentLoaded', () => {
+    getSiteData();
+    getPosts();
+  });
+
+  window.addEventListener('scroll', e => {
+    // Cuanto se aleja el scroll del top, Altura del View Port, Altura del Documento
+    const {scrollTop, clientHeight, scrollHeight} = document.body;
+    if(scrollTop + clientHeight + 1000 >= scrollHeight){
+      page++;
+      getPosts();
+    };
+  });
+</script>
+</html>
