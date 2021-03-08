@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Librerlia de Componentes con Estados</title>
+</head>
+
+<body>
+  <h1>Estado Inmutable</h1>
+  <form id="todo-form">
+    <input type="text" id="todo-item" placeholder="Tarea por hacer">
+    <input type="submit" value="Agregar">
+  </form>
+  <h2>Lista de Tareas</h2>
+  <ul id="todo-list"></ul>
+  <script src="Component.js"></script>
+  <script>
+    let d = document;
+
+    let app = new Component({
+      elem: '#todo-list',
+      data: {todoList: []},
+      template: function(props){
+        let todos = props.todoList.map(item => `<li>${item}</li>`);
+      
+        if(props.todoList.length === 0) return `<p>Lista Sin Tareas</p>`;
+        return todos.join('');
+        }
+    });
+
+    d.addEventListener('DOMContentLoaded', app.render);
+
+    // ESTABLECIONDO VALORES POR DEFECTO
+    app.setState({todoList: ['task 1','task 2','task 3']})
+
+    d.addEventListener("submit", e => {
+      if (!e.target.matches("#todo-form")) return false;
+
+      e.preventDefault();
+
+      let $item = d.getElementById("todo-item");
+
+    // ACTUALIZAR ESTADO DE FORMA REACTIVA
+    let lastState = app.getState();
+
+    lastState.todoList.push($item.value);
+    app.setState({ todoList: lastState.todoList });
+
+    });
+  </script>
+</body>
+
+</html>

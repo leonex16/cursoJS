@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Compontes por estado</title>
+</head>
+
+<body>
+  <h1>Estado Inmutable</h1>
+  <form id="todo-form">
+    <input type="text" id="todo-item" placeholder="Tarea por hacer">
+    <input type="submit" value="Agregar">
+  </form>
+  <h2>Lista de Tareas</h2>
+  <ul id="todo-list"></ul>
+  <script>
+    let d = document;
+
+    // STATE
+    let state = {
+      todoList: []
+    };
+
+    // TEMPLATE UI
+    let template = () => {
+      let todos = template.data.todoList.map(item => `<li>${item}</li>`);
+      
+      if(template.data.todoList.length === 0) {
+        return `<p>Lista Sin Tareas</p>`
+      }
+
+      return todos.join('');
+    };
+
+    // AGREGAR ESTADO AL TEMPLATE QUE GENERA EL COMPONENTE UI
+    template.data = {
+      todoList: []
+    }
+
+    // REDERIZADO
+    let render = () => {
+      let $list = d.getElementById("todo-list");
+      
+      if(!$list) return false;
+      $list.innerHTML = template();
+    };
+
+    // ACTUALIZAR EL STATE DE FORMA REACTIVA
+    let setState = obj => {
+      for(let key in obj) {
+        if(template.data.hasOwnProperty(key)){
+          state[key] = obj[key];
+        }
+      }
+      render();
+    };
+
+    // SE OBTIENE UNA COPIA INMUTABLE DEL STATE
+    let getState = () => JSON.parse(JSON.stringify(template.data));
+
+    d.addEventListener('DOMContentLoaded', render);
+
+    // ESTABLECIONDO VALORES POR DEFECTO
+    setState({todoList: ['task 1','task 2','task 3']})
+
+    d.addEventListener("submit", e => {
+      if (!e.target.matches("#todo-form")) return false;
+
+      e.preventDefault();
+
+      let $item = d.getElementById("todo-item");
+
+          // ACTUALIZAR ESTADO DE FORMA REACTIVA
+    let lastState = getState();
+
+    lastState.todoList.push($item.value);
+    setState({ todoList: lastState.todoList });
+
+    });
+  </script>
+</body>
+
+</html>
